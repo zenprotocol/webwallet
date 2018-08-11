@@ -1,0 +1,11 @@
+@import "styles/Variables";
+
+.main {
+  flex: 1;
+  background: $bg-color;
+}
+
+.inner-main {
+  margin-left: $sidebar-width;
+  width: calc(100% - #{$sidebar-width})
+}

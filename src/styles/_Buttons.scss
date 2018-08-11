@@ -1,0 +1,75 @@
+.swal-button, button, .button, {
+  height: 36px;
+  min-width: 120px;
+  box-sizing: border-box;
+  padding: 10px 20px;
+  text-align: center;
+  border-radius: 2px;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  border: none;
+  letter-spacing: 0.5px;
+  cursor: pointer;
+  text-decoration: none;
+  background: $blue;
+  box-shadow: none;
+
+  border: 1px solid $blue;
+
+  i.fa.fa-spinner { margin-left: 6px; }
+
+  &:hover { background-color: $blue-hover; }
+  &:focus {
+    background-color: $blue-focus; outline: none;
+    box-shadow: none;
+  }
+
+  &.disabled, &:disabled {
+    background-color: $blue-disabled;
+    pointer-events: none;
+    cursor: default;
+    color: rgba(255, 255, 255, 0.4);
+    border: 1px solid $blue-disabled;
+  }
+
+  &.secondary {
+    background-color: $button-grey;
+    border: 1px solid $button-grey;
+  }
+  &.secondary:hover { background-color: $button-grey-hover; }
+  &.secondary:focus { background-color: $button-grey-focus; }
+  &.secondary:disabled { background-color: $button-grey-disabled; }
+
+  &.alert, &.swal-button--cancel {
+    background: $red;
+    color: $off-white;
+    border: 1px solid $red;
+    &:hover { background: $red-hover; }
+    &:focus { background: $red-focus; }
+    &:disabled { background: $red-disabled; }
+  }
+  &.info {}
+
+  &.small {
+    font-size: 13px;
+    padding: 5px 14px;
+    height: initial;
+    width: initial;
+    min-width: initial;
+    line-height: 17px;
+  }
+  &.button-on-right { margin-left: 17px; }
+  &.margin-right { margin-right: 10px; }
+}
+
+button {
+  &.small {
+    padding: 7px 14px;
+    position: relative;
+    top: -1px;
+  }
+
+}
+
+.btn-block { width: 100%; }

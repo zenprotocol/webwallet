@@ -1,0 +1,24 @@
+@import "styles/Variables";
+
+.address-div {
+  padding: 23px 34px 41px 34px;
+  background: #1b1c1d;
+  border-bottom: 1px solid #303841;
+
+  h3 {
+    margin-bottom: 15px;
+  }
+
+  .address-input {
+    button.copy-button {
+      padding: 12px 40px;
+    }
+  }
+
+  .copied-to-clipboard-message { color: $light-blue; }
+}
+
+.receive-container {
+  width: 100%;
+  input#public-address { width: 100%; }
+}

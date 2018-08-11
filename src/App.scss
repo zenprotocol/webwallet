@@ -1,0 +1,57 @@
+/*
+ * @NOTE: Prepend a `~` to css file paths that are in your node_modules
+ *        See https://github.com/webpack-contrib/sass-loader#imports
+ */
+ @import url('https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,600');
+ @import url('https://fonts.googleapis.com/css?family=Roboto+Mono');
+ @import url('https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700');
+
+ @import "~normalize.css/normalize";
+
+ @import "styles/utils";
+ @import "styles/Reset";
+ @import "styles/Variables";
+ @import "styles/Shared";
+ @import "styles/KeyFrames";
+ @import "styles/Swal";
+ @import "styles/Table";
+ @import "styles/Buttons";
+ @import "styles/Forms";
+ @import "styles/AutoSuggest";
+ @import "styles/MonokaiSublime";
+ @import "styles/Balloon";
+ //
+ @import "components/Layout/Layout";
+ @import "components/Container/Container";
+ @import "components/Main/Main";
+ @import "components/Topbar/Topbar";
+ @import "components/Footer/Footer";
+ @import "components/Sidebar/Sidebar";
+ @import "components/FormResponseMessage/FormResponseMessage";
+ //
+ @import "pages/ErrorScreen/ErrorScreen";
+ @import "pages/Portfolio/Portfolio";
+ @import "pages/Receive/Receive";
+ @import "pages/SendTx/SendTx";
+ @import "pages/Faucet/Faucet";
+ @import "pages/ActiveContracts/ActiveContracts";
+ @import "pages/Loading/Loading";
+ @import "pages/UnlockWallet/UnlockWallet";
+ //
+ @import "onBoardingPages/Layout/Layout";
+ @import "onBoardingPages/WelcomeMessages/WelcomeMessages";
+ @import "onBoardingPages/ImportOrCreateWallet/ImportOrCreateWallet";
+ @import "onBoardingPages/SecretPhrase/SecretPhrase";
+ @import "onBoardingPages/SecretPhraseQuiz/SecretPhraseQuiz";
+ @import "onBoardingPages/SetPassword/SetPassword";
+ @import "onBoardingPages/TermsOfService/TermsOfService";
+ 
+ #root { height: 100%; }
+
+.app-wrapper {
+  height: 100%;
+  animation: fadein 0.5s;
+}
+html {
+  overflow-y: overlay;
+}

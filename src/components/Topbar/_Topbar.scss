@@ -1,0 +1,56 @@
+@import "styles/Variables";
+
+.header {
+  height: 100px;
+    background: $dark-grey;
+
+		.back-buttons {
+			padding: 24px;
+
+			a {
+        line-height: 29px;
+        border: 1px solid #2b2b2c;
+        border-radius: 2px 0 0 2px;
+        width: 33px;
+        height: 33px;
+        font-size: 2rem;
+        color: $bright-grey;
+        cursor: default;
+        text-align: center;
+
+        i.fa { font-size: 25px; }
+
+        &.forward-button {
+          border-left: none;
+          border-radius: 0 2px 2px 0;
+        }
+
+        &.active {
+          color: $off-white;
+          background-color: $dark-grey-2;
+          cursor: pointer;
+          &:hover { background-color: $light-grey; }
+          &:active { background-color: $grey; }
+        }
+
+      }
+		}
+
+    .balance {
+        width: 200px;
+        padding: 24px 24px 0 0;
+        text-align: right;
+        text-transform: uppercase;
+
+        .balance-and-ticker {
+          margin-bottom: 5px;
+          color: $light-white;
+
+          .total-balance, .zen-symbol { font-size: 14px; font-weight: 600; }
+          .total-balance { color: $bright-grey; margin: 7px; }
+        }
+
+    }
+    .account-balance { font-weight: 600; color: $light-white; font-size: 22px; }
+
+}
