@@ -1,0 +1,130 @@
+.onboarding-container {
+  background: $dark-grey;
+  min-height: 100%;
+  min-height: 600px;
+  font-family: Roboto;
+
+  .body {
+    width: 770px;
+    margin: 50px auto;
+    height: 75%;
+    min-height: 500px;
+    max-height: 600px;
+  }
+
+  .onboarding-header {
+    background: #181818;
+    border-bottom: 1px solid $almost-black;
+  }
+
+  h1 {
+    font-size: 28px;
+    font-weight: 300;
+    letter-spacing: 0.3px;
+    color: #e6e6e6;
+    margin-bottom: 10px;
+  }
+
+  h3 {
+    font-size: 15px;
+    font-weight: 300;
+    line-height: 1.14;
+    letter-spacing: 0.2px;
+    color: $bright-grey;
+  }
+
+  .bullet-points {
+    p.reduce-errors {
+      margin: 40px 20px 0 0;
+      font-size: 20px;
+      font-weight: 300;
+      line-height: 25px;
+    }
+  }
+
+  .bullet-image {
+    img.bug-img {
+      padding: 0 40px;
+    }
+  }
+
+  p {
+    font-weight: 500;
+    margin-bottom: 14px;
+    letter-spacing: 0.2px;
+
+    &.warning {
+      text-transform: uppercase; color: $red;
+    }
+  }
+
+  .progress-bar {
+
+    padding: 23px;
+
+    li {
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      border-radius: 100px;
+      font-weight: 500;
+      text-align: center;
+      margin: 0 17px;
+      display: inline-block;
+      color: white;
+      position: relative;
+      background: $blue;
+      border: 2px solid $blue;
+
+      &::before{
+        content: '';
+        position: absolute;
+        top: .9em;
+        left: -36px;
+        width: 34px;
+        height: 2px;
+        background: $blue;
+        z-index: 1;
+      }
+
+      &:first-child::before { display: none; }
+
+    }
+
+    .active {
+      background: transparent;
+      color: $blue;
+      border: 2px solid $blue;
+    }
+    .active ~ li {
+      background: transparent;
+      border: 2px solid #2a2a2b;
+      color: #2a2a2b;
+    }
+    .active ~ li::before {
+      background: #2a2a2b;
+    }
+
+  }
+
+  .zen-logo img {
+    width: 97px;
+    height: 42px;
+    padding: 19px 33px;
+  }
+
+  .devider.before-buttons {
+    margin-top: 37.5px;
+    margin-bottom: 29px;
+  }
+
+  .devider.after-title {
+    margin-top: 19px;
+    margin-bottom: 35px;
+  }
+
+}
+
+.import-create-wallet-container {
+  .box {}
+}

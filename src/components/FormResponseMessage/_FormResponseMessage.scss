@@ -1,0 +1,29 @@
+@import "styles/Variables";
+
+.form-response-message {
+  padding: 20px;
+  border-radius: 2px;
+  border: 1px solid $input-border-color;
+  line-height: 1.5;
+
+  svg {
+    padding: 0 15px 0 0;
+    font-size: 22px;
+  }
+
+  &.success {
+    border-top: 4px solid $blue;
+    svg { color: $blue; }
+  }
+
+  &.warning {
+    border-top: 4px solid $orange;
+    svg { color: $orange; }
+  }
+
+  &.error {
+    border-top: 4px solid $red;
+    svg { color: $red; }
+  }
+
+}

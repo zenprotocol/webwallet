@@ -1,0 +1,14 @@
+{
+  "extends": "react-app",
+  "rules": {
+    "semi": ["error", "never"],
+    "no-unexpected-multiline": 2,
+    "import/order": ["error", {"newlines-between": "always"}],
+    "import/no-unresolved": "error",
+    "import/no-extraneous-dependencies": "off"
+  },
+  "plugins": [
+    "flowtype",
+    "import"
+  ]
+}
