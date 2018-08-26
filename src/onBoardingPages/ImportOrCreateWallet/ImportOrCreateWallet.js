@@ -18,25 +18,27 @@ class ImportOrCreateWallet extends Component {
         </h3>
 
         <div className="devider after-title" />
+        <Flexbox className="body-section">
+          <Flexbox flexDirection="row" justifyContent="space-between" className="body-section">
 
-        <Flexbox flexDirection="row" justifyContent="space-between">
+            <Flexbox className="box create-wallet" flexDirection="column">
+              <img src={CREATE_WALLET_SRC} alt="Create wallet" />
+              <h5>Create New Wallet</h5>
+              <p>Creating a new wallet will generate a 24 word mnemonic passphrase (seed) which you will need to store in a secure place. We recommend 2 pieces of paper.</p>
+              <Link className="button" to={routes.SECRET_PHRASE}>Create Wallet</Link>
+            </Flexbox>
 
-          <Flexbox className="box create-wallet" flexDirection="column">
-            <img src={CREATE_WALLET_SRC} alt="Create wallet" />
-            <h5>Create New Wallet</h5>
-            <p>Creating a new wallet will generate a 24 word mnemonic passphrase (seed) which you will need to store in a secure place. We recommend 2 pieces of paper.</p>
-            <Link className="button" to={routes.SECRET_PHRASE}>Create Wallet</Link>
+            <Flexbox className="box import-wallet" flexDirection="column">
+              <img src={IMPORT_WALLET_SRC} alt="Import wallet" />
+              <h5>Import Existing Wallet</h5>
+              <p>If you already have a secret phrase (seed) you can simply import it and get access to all of your assets.</p>
+              <Link className="button secondary" to={routes.IMPORT_WALLET}>Import Wallet</Link>
+
+            </Flexbox>
+
+
           </Flexbox>
-
-          <Flexbox className="box import-wallet" flexDirection="column">
-            <img src={IMPORT_WALLET_SRC} alt="Import wallet" />
-            <h5>Import Existing Wallet</h5>
-            <p>If you already have a secret phrase (seed) you can simply import it and get access to all of your assets.</p>
-            <Link className="button secondary" to={routes.IMPORT_WALLET}>Import Wallet</Link>
-
-          </Flexbox>
-
-        </Flexbox>
+        </Flexbox>  
 
       </OnBoardingLayout>
     )

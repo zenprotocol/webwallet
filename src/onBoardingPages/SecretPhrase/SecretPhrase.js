@@ -56,7 +56,7 @@ class SecretPhrase extends React.Component<Props, State> {
         <p className="warning">If you lose this passphrase you will lose all assets in the wallet!</p>
         <div className="devider before-buttons" />
 
-        <Flexbox flexDirection="row">
+        <Flexbox flexDirection="row" className="body-section">
           <Flexbox flexGrow={1} flexDirection="row">
             <label className="checkbox">
               <Checkbox type="checkbox" checked={checked} onChange={this.onToggleSecuredPassphrase} />

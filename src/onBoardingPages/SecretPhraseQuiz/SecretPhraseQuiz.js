@@ -90,7 +90,7 @@ class SecretPhraseQuiz extends Component<Props, State> {
         <ol className="passphrase-quiz">{this.renderQuizInputs()}</ol>
         <div className="devider before-buttons" />
 
-        <Flexbox flexDirection="row">
+        <Flexbox flexDirection="row" className="body-section">
           <Flexbox className="oops" flexGrow={1} flexDirection="column">
             <p>Whoops, I didn’t write my recovery phrase.</p>
             <Link to={routes.IMPORT_OR_CREATE_WALLET}>Create New Wallet</Link>

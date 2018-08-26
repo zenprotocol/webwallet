@@ -1,5 +1,7 @@
 .import-create-wallet-container {
 
+  .body-section {	min-height: 600px; }
+
   .box {
   	background-color: $dark-grey-2;
   	padding: 33px;
@@ -7,7 +9,7 @@
   	width: 40%;
   	text-align: center;
   	position: relative;
-  	min-height: 280px;
+  	height: 280px;
 
   	img {
 			margin: auto;

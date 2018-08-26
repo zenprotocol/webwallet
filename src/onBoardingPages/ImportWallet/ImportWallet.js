@@ -132,7 +132,7 @@ class ImportWallet extends Component<Props, State> {
         {this.notValidBip39PhraseMessage}
         <div className="devider before-buttons" />
 
-        <Flexbox flexDirection="row">
+        <Flexbox flexDirection="row" className="body-section">
           <Flexbox flexGrow={1} />
           <Flexbox flexGrow={2} />
           <Flexbox flexGrow={1} justifyContent="flex-end" flexDirection="row">

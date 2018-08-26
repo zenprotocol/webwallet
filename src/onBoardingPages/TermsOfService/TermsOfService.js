@@ -28,7 +28,7 @@ class TermsOfService extends Component<Props> {
     const { checked } = this.state
 
     return (
-      <OnBoardingLayout className="terms-of-service-container" progressStep={5}>
+      <OnBoardingLayout className="terms-of-service-container body-section" progressStep={5}>
         <h1>Terms and Conditions</h1>
         <h3>Please carefully read these terms before accepting.</h3>
         <div className="devider after-title" />
