@@ -50,7 +50,7 @@ class PortfolioStore {
     }
 
     get assets() {
-      return []
+
       return this.rawAssets.map(asset => ({
         ...asset,
         name: this.getAssetName(asset.asset),
