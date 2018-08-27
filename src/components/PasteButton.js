@@ -16,9 +16,13 @@ class PasteButton extends Component<Props> {
     className: '',
   }
   onClick = (evt: SyntheticEvent<HTMLButtonElement>) => {
-    // TODO
-    alert('todo')
-    // this.props.onClick(clipboard.readText().trim(), evt)
+      navigator.clipboard.readText()
+          .then(text => {
+              this.props.onClick(text, evt)
+          })
+          .catch(err => {
+              console.error('Failed to read clipboard contents: ', err)
+          })
   }
   render() {
     const {
