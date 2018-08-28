@@ -96,14 +96,26 @@ class Copy extends React.Component<Props, State> {
   }
   onCopy = () => {
     this.clearTimeout() // in case of multiple onCopy events
-    const { timeoutMilliseconds } = this.props
-    // const { valueToCopy, timeoutMilliseconds } = this.props
+    //const { timeoutMilliseconds } = this.props
+    const { valueToCopy, timeoutMilliseconds } = this.props
     // TODO
-    // clipboard.writeText(valueToCopy)
+     //clipboard.writeText(valueToCopy)
+      this.copyAddress()
+
     this.setState({ isActive: true })
     this.copyTimeout = setTimeout(this.setNonActive, timeoutMilliseconds)
     this.highlightInput()
   }
+
+    copyAddress = async () => {
+        try {
+            await navigator.clipboard.writeText(this.props.valueToCopy)
+            console.log('Page URL copied to clipboard')
+        } catch (err) {
+            console.error('Failed to copy: ', err)
+        }
+    }
+
   highlightInput() {
     if (this.elInput) {
       this.elInput.select()

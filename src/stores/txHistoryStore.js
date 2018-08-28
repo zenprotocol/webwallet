@@ -4,6 +4,8 @@ import { observable, action, runInAction } from 'mobx'
 import { getTxHistory } from '../services/api-service'
 import PollManager from '../utils/PollManager'
 
+import PublicAddressStore from './publicAddressStore'
+
 class TxHistoryStore {
   @observable batchSize = 100
   @observable transactions = []
@@ -24,6 +26,7 @@ class TxHistoryStore {
     this.fetchPollManager.stopPolling()
   }
 
+
   @action
   reset() {
     this.stopPolling()
@@ -41,7 +44,7 @@ class TxHistoryStore {
     this.isFetching = true
     try {
       const result = await getTxHistory({
-        skip: this.skip, take: this.currentPageSize + this.batchSize,
+          addresses: PublicAddressStore.address, skip: this.skip, take: this.currentPageSize + this.batchSize,
       })
       runInAction(() => {
         if (result.length) {

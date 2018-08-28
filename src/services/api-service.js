@@ -50,6 +50,7 @@ export async function getActiveContracts(): Promise<ActiveContract[]> {
 }
 
 type TransactionRequest = {
+  addresses: [ number ],
   skip: number,
   take: number
 };
@@ -67,7 +68,7 @@ export type TransactionResponse = {
 };
 
 export async function getTxHistory({
-  skip, take,
+    addresses, skip, take,
 }: TransactionRequest = {}): Promise<TransactionResponse[]> {
   const response = await instance.get(`history?skip=${skip}&take=${take}`, {
     headers: { 'Content-Type': 'application/json' },

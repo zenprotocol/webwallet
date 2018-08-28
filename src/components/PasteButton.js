@@ -15,14 +15,25 @@ class PasteButton extends Component<Props> {
     text: 'Paste',
     className: '',
   }
+
   onClick = (evt: SyntheticEvent<HTMLButtonElement>) => {
-      navigator.clipboard.readText()
-          .then(text => {
-              this.props.onClick(text, evt)
-          })
-          .catch(err => {
-              console.error('Failed to read clipboard contents: ', err)
-          })
+      const isSafari  = navigator.appVersion.search('Safari') !== -1 && navigator.appVersion.search('Chrome') === -1 && navigator.appVersion.search('CrMo') === -1
+
+
+      if (!isSafari){
+          navigator.clipboard.readText()
+              .then(text => {
+                  this.props.onClick(text, evt)
+              })
+              .catch(err => {
+                  console.error('Failed to read clipboard contents: ', err)
+              })
+      } else {
+          const data = new ClipboardEvent('paste')
+          data.clipboardData.getData('text/plain')
+          console.log(data)
+      }
+
   }
   render() {
     const {
