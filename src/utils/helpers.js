@@ -1,6 +1,7 @@
 // @flow
 
 import bech32 from 'bech32'
+import swal from "sweetalert"
 
 const validPrefixes = ['zen', 'tzn', 'czen', 'ctzn']
 
@@ -57,4 +58,13 @@ export const numberWithCommas = (x: number | string): string => {
   const parts = x.toString().split('.')
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
   return parts.join('.')
+}
+
+export const errorMessage = async () => {
+     await swal({
+        title: 'Not supported browser',
+        icon: 'warning',
+        dangerMode: true,
+        button: true,
+    })
 }

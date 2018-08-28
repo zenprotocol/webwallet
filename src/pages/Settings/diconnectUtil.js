@@ -5,9 +5,6 @@ import history from "../../services/history"
 import routes from "../../constants/routes"
 import wallet from '../../services/wallet'
 
-
-
-
 const disconnect = async () => {
   const shouldDisconnect = await swal({
     title: 'Confirm Disconnect',
