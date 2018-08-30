@@ -2,21 +2,24 @@ import { observable, action } from 'mobx'
 import bip39 from 'bip39'
 import { SecurePhrase } from '@zen/zenjs'
 
+
 import routes from '../constants/routes'
 import history from '../services/history'
 import wallet from '../services/wallet'
 import { isDev } from '../utils/helpers'
 
+
+
 const LS_AUTO_LOGOUT_MINUTES = 'autoLogoutMinutes'
-const LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING = 'encryptedMnemonicPhraseAsString'
+export const LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING = 'encryptedMnemonicPhraseAsString'
 
 class secretPhraseStore {
   // TODO remove after initial version is up
-  @observable mnemonicPhrase = ["pride", "six", "delay", "awful", "fitness", "sadness", "crush", "school", "tent", "margin", "sweet", "trouble", "avocado", "dove", "liberty", "trumpet", "trick", "neglect", "require", "always", "fringe", "cram", "shadow", "jelly"]
-  // @observable mnemonicPhrase = []
+  // @observable mnemonicPhrase = ["pride", "six", "delay", "awful", "fitness", "sadness", "crush", "school", "tent", "margin", "sweet", "trouble", "avocado", "dove", "liberty", "trumpet", "trick", "neglect", "require", "always", "fringe", "cram", "shadow", "jelly"]
+  @observable mnemonicPhrase = []
   @observable isLoggedIn = false
   @observable autoLogoutMinutes = Number(localStorage.getItem(LS_AUTO_LOGOUT_MINUTES)) || 15
-  @observable inprogress = false
+  @observable inProgress = false
   @observable isImporting = false
   @observable importError = ''
   @observable status = ''
@@ -45,26 +48,44 @@ class secretPhraseStore {
   @action
   async importWallet(password) {
     wallet.create(this.mnemonicPhraseAsString, this.networkStore.chain)
-    const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt(password, this.mnemonicPhraseAsString.split(' '))
+    const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt('1234', 'hello world')
     localStorage.setItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING, encryptedMnemonicPhraseAsString)
     this.mnemonicPhrase = []
     this.isLoggedIn = true
     this.networkStore.initPolling()
     this.activeContractsStore.fetch()
     history.push(routes.TERMS_OF_SERVICE)
-    return
   }
-  
+
+  get mnemonicToBuffer() {
+    const buf = this.mnemonicPhrase.map( (x) =>
+        Buffer.from(x, 'ascii'))
+      console.log(buf)
+      return buf
+    }
+
   @action
   async unlockWallet(password) {
-    const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
-    if (!decryptedMnemonicPhraseAsString) {
-      this.status = 'error'
-      return
-    }
-    wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
+      if (!this.isPasswordCorrect(password)){
+          this.status = 'error'
+          return
+      }
+
+      // console.log(this.doesWalletExist)
+      // if (this.doesWalletExist){
+      //     console.log('We Inside')
+      //     const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
+      //     if (!decryptedMnemonicPhraseAsString) {
+      //         this.status = 'error'
+      //         return
+      //     }
+      //     wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
+      // }
     this.isLoggedIn = true
     this.networkStore.initPolling()
+    if (wallet.instance !== null) {
+        wallet.fetchPollManager.initPolling()
+    }
     this.activeContractsStore.fetch()
     if (this.redeemTokensStore.shouldRedeemNonMainnetTokens) {
       history.push(routes.FAUCET)
@@ -116,7 +137,7 @@ class secretPhraseStore {
     this.importError = ''
     this.status = ''
     this.isLoggedIn = false
-    wallet.destroy()
+    wallet.fetchPollManager.stopPolling()
     this.networkStore.stopPolling()
   }
 
@@ -124,12 +145,13 @@ class secretPhraseStore {
   initDev() {
     this.networkStore.initPolling()
     this.activeContractsStore.fetch()
-
   }
 
   get doesWalletExist() {
     return !!localStorage.getItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING)
   }
+
 }
+
 
 export default secretPhraseStore

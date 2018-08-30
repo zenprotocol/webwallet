@@ -113,14 +113,14 @@ class SendTx extends Component<Props> {
   }
 
   get isSubmitButtonDisabled() {
-    const { inprogress } = this.props.sendTxStore
-    return inprogress || !this.areAllFieldsValid
+    const { inProgress } = this.props.sendTxStore
+    return inProgress || !this.areAllFieldsValid
   }
   render() {
     const {
       portfolioStore,
       sendTxStore: {
-        to, asset, amount, amountDisplay, inprogress,
+        to, asset, amount, amountDisplay, inProgress,
       },
     } = this.props
 
@@ -190,11 +190,11 @@ class SendTx extends Component<Props> {
             <Flexbox flexGrow={2} />
             <Flexbox flexGrow={1} justifyContent="flex-end" flexDirection="row">
               <ProtectedButton
-                className={cx('button-on-right', { loading: inprogress })}
+                className={cx('button-on-right', { loading: inProgress })}
                 disabled={this.isSubmitButtonDisabled}
                 onClick={this.onSubmitButtonClicked}
               >
-                {inprogress ? 'Sending' : 'Send'}
+                {inProgress ? 'Sending' : 'Send'}
               </ProtectedButton>
             </Flexbox>
           </Flexbox>

@@ -41,9 +41,9 @@
   version "15.6.19"
   resolved "https://registry.yarnpkg.com/@types/react/-/react-15.6.19.tgz#a5de18afe65b0f29767328836b48c498a5d3a91b"
 
-"@zen/zenjs@^0.0.17":
-  version "0.0.17"
-  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.17.tgz#d933a14e9641ac7c3a254891d6f7de4a74c59ddb"
+"@zen/zenjs@0.0.15":
+  version "0.0.15"
+  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.15.tgz#0bbe2e1e769922f8ef8ac4646cd6f31483fa683c"
   dependencies:
     aes-js "^3.1.1"
     axios "^0.18.0"
@@ -3587,7 +3587,7 @@ fsevents@1.1.2:
     nan "^2.3.0"
     node-pre-gyp "^0.6.36"
 
-fsevents@^1.0.0, fsevents@^1.2.2:
+fsevents@^1.0.0, fsevents@^1.2.2, fsevents@^1.2.4:
   version "1.2.4"
   resolved "https://registry.yarnpkg.com/fsevents/-/fsevents-1.2.4.tgz#f41dcb1af2582af3692da36fc55cbd8e1041c426"
   dependencies:
@@ -6903,6 +6903,10 @@ react-autowhatever@^10.1.0:
     prop-types "^15.5.8"
     react-themeable "^1.1.0"
     section-iterator "^2.0.0"
+
+react-detect-offline@^2.1.2:
+  version "2.1.2"
+  resolved "https://registry.yarnpkg.com/react-detect-offline/-/react-detect-offline-2.1.2.tgz#1827b1db88c8ae40ca70dfd995dfb0aff702126b"
 
 react-dev-utils@^3.1.0:
   version "3.1.1"
