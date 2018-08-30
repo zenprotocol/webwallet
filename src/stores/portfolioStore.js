@@ -2,8 +2,8 @@ import { observable, computed, action, runInAction } from 'mobx'
 import { find } from 'lodash'
 
 import wallet from '../services/wallet'
-// import { zenBalanceDisplay, kalapasToZen, isZenAsset } from '../utils/zenUtils'
-// import { numberWithCommas } from '../utils/helpers'
+import { zenBalanceDisplay, kalapasToZen, isZenAsset } from '../utils/zenUtils'
+import { numberWithCommas } from '../utils/helpers'
 import { ZEN_ASSET_NAME, ZEN_ASSET_HASH } from '../constants/constants'
 
 class PortfolioStore {
@@ -17,19 +17,25 @@ class PortfolioStore {
 
     @action.bound
     updateBalancesFromWallet = () => {
-        const rawAssets = wallet.instance.getBalance()
+        const balance = wallet.instance.getBalance()
+        const rawAssets = Object.keys(balance).map(key => {
+            return {
+                asset: key,
+                balance: balance[key]
+            }
+        })
         console.log(rawAssets)
         runInAction(() => this.rawAssets = rawAssets)
         // if there's a balance without asset name, check ACS if matching contract exists
         // if it does, save it to DB
-        // rawAssets.filter(asset => !this.getAssetName(asset.asset))
-        //   .forEach(asset => {
-        //     const matchingActiveContract =
-        //       this.activeContractsStore.activeContracts.find(ac => ac.contractId === asset.asset)
-        //     if (matchingActiveContract) {
-        //       db.get('savedContracts').push(matchingActiveContract).write()
-        //     }
-        //   })
+        rawAssets.filter(asset => !this.getAssetName(asset.asset))
+          .forEach(asset => {
+            const matchingActiveContract =
+              this.activeContractsStore.activeContracts.find(ac => ac.contractId === asset.asset)
+            if (matchingActiveContract) {
+              //
+            }
+          })
     }
 
     fetch() {
@@ -52,15 +58,15 @@ class PortfolioStore {
     get assets() {
         // wallet has different balance API then zen-node
         // haven't implemented it yet here
-        return []
-        // return this.rawAssets.map(asset => ({
-        //   ...asset,
-        //   name: this.getAssetName(asset.asset),
-        //   balance: isZenAsset(asset.asset) ? kalapasToZen(asset.balance) : asset.balance,
-        //   balanceDisplay: isZenAsset(asset.asset)
-        //     ? zenBalanceDisplay(asset.balance)
-        //     : numberWithCommas(asset.balance),
-        // }))
+        // return []
+        return this.rawAssets.map(asset => ({
+          ...asset,
+          name: this.getAssetName(asset.asset),
+          balance: isZenAsset(asset.asset) ? kalapasToZen(asset.balance) : asset.balance,
+          balanceDisplay: isZenAsset(asset.asset)
+            ? zenBalanceDisplay(asset.balance)
+            : numberWithCommas(asset.balance),
+        }))
     }
 
     filteredBalances = query => {

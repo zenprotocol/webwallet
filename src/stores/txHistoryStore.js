@@ -3,8 +3,10 @@ import { observable, action, runInAction } from 'mobx'
 
 import { getTxHistory } from '../services/api-service'
 import PollManager from '../utils/PollManager'
+// import wallet from '../services/wallet'
 
 import PublicAddressStore from './publicAddressStore'
+
 
 class TxHistoryStore {
   @observable batchSize = 100
@@ -43,6 +45,7 @@ class TxHistoryStore {
     if (this.isFetching) { return }
     this.isFetching = true
     try {
+        // TODO const result = wallet.instance.getTransactions()
       const result = await getTxHistory({
           addresses: PublicAddressStore.address, skip: this.skip, take: this.currentPageSize + this.batchSize,
       })
