@@ -63,18 +63,17 @@ class secretPhraseStore {
         Buffer.from(x, 'ascii'))
       console.log(buf)
       return buf
-}
+    }
 
   @action
   async unlockWallet(password) {
-    const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
-    if (!decryptedMnemonicPhraseAsString) {
-      this.status = 'error'
-      return
-    }
-    wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
+      if (!this.isPasswordCorrect(password)){
+          this.status = 'error'
+          return
+      }
     this.isLoggedIn = true
     this.networkStore.initPolling()
+    wallet.fetchPollManager.initPolling()
     this.activeContractsStore.fetch()
     if (this.redeemTokensStore.shouldRedeemNonMainnetTokens) {
       history.push(routes.FAUCET)
@@ -126,7 +125,7 @@ class secretPhraseStore {
     this.importError = ''
     this.status = ''
     this.isLoggedIn = false
-    wallet.destroy()
+    wallet.fetchPollManager.stopPolling()
     this.networkStore.stopPolling()
   }
 

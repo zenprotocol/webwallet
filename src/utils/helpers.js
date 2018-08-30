@@ -60,9 +60,9 @@ export const numberWithCommas = (x: number | string): string => {
   return parts.join('.')
 }
 
-export const errorMessage = async () => {
+export const showErrorMessage = async () => {
      await swal({
-        title: 'Not supported browser',
+        title: 'Your browser is not supported',
         icon: 'warning',
         dangerMode: true,
         button: true,

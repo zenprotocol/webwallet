@@ -46,6 +46,9 @@ class _Wallet {
     fnToPoll: this.fetch,
     timeoutInterval: 3000,
   })
+  getBalance() {
+    Wallet.getBalance()
+  }
 }
 
 const wallet = new _Wallet()

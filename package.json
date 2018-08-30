@@ -21,6 +21,7 @@
     "rc-checkbox": "^2.1.5",
     "react": "^16.4.2",
     "react-autosuggest": "^9.3.4",
+    "react-detect-offline": "^2.1.2",
     "react-dom": "^16.4.2",
     "react-error-boundary": "^1.2.3",
     "react-highlight": "^0.12.0",

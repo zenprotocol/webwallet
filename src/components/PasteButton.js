@@ -4,7 +4,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 
 import FontAwesomeIcon from '../vendor/@fortawesome/react-fontawesome'
-import { errorMessage } from '../utils/helpers'
+import { showErrorMessage } from '../utils/helpers'
 
 type Props = {
   text?: string,
@@ -34,7 +34,8 @@ class PasteButton extends Component<Props> {
               console.log(data)
           }
       } catch (err) {
-          errorMessage()
+          console.error(err)
+          showErrorMessage()
       }
 
   }

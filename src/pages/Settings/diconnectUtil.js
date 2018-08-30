@@ -7,7 +7,7 @@ import wallet from '../../services/wallet'
 
 const disconnect = async () => {
   const shouldDisconnect = await swal({
-    title: 'Confirm Disconnect',
+    title: 'Confirm disconnect',
     icon: 'warning',
     dangerMode: true,
     buttons: true,
