@@ -11,7 +11,6 @@
     "custom-react-scripts": "0.2.2",
     "decimal.js": "^10.0.1",
     "flexbox-react": "^4.4.0",
-    "fsevents": "^1.2.4",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
     "mobx": "^5.0.3",
