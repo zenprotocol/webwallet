@@ -8,6 +8,7 @@ import SecretPhraseStore from '../../stores/secretPhraseStore'
 import NetworkStore from '../../stores/networkStore'
 import Layout from '../../components/Layout'
 
+import disconnect from './diconnectUtil'
 import showSeed from './showSeedUtil'
 import logout from './logoutUtil'
 import './Settings.scss'
@@ -75,6 +76,19 @@ class Settings extends Component<Props> {
       </Flexbox>
     )
   }
+  renderDisconnect() {
+      return (
+          <Flexbox className="row">
+              <Flexbox flexDirection="column" className="description">
+                  <h2 className="description-title">Disconnect</h2>
+              </Flexbox>
+              <Flexbox flexDirection="column" className="actions">
+                  <button className="secondary" onClick={disconnect}>Disconnect</button>
+              </Flexbox>
+          </Flexbox>
+      )
+  }
+
   render() {
     return (
       <Layout className="settings-page">
@@ -84,6 +98,7 @@ class Settings extends Component<Props> {
         {this.renderAutoLogout()}
         {this.renderShowSeed()}
         {this.renderLogout()}
+        {this.renderDisconnect()}
       </Layout>
     )
   }

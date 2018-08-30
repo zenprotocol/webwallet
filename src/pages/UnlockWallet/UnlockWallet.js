@@ -9,8 +9,7 @@ import FontAwesomeIcon from '../../vendor/@fortawesome/react-fontawesome'
 import NonMainNetBottomBar from '../../components/NonMainNetBottomBar'
 import ToggleVisibilityIcon from '../../components/ToggleVisibilityIcon'
 import SecretPhraseStore from '../../stores/secretPhraseStore'
-
-import forgotPasswordModal from './forgotPasswordModal'
+import disconnect from "../Settings/diconnectUtil"
 
 type Props = {
   secretPhraseStore: SecretPhraseStore
@@ -100,8 +99,7 @@ class UnlockWallet extends Component<Props, State> {
               { this.renderButtonIcon() }
             </button>
           </form>
-
-          <a style={{ textDecoration: 'underline' }} onClick={forgotPasswordModal} className="forgot-password">
+          <a style={{ textDecoration: 'underline' }} onClick={disconnect} className="disconnect">
             Forgot your password? Import your wallet again or create a new one
           </a>
           {/* $FlowFixMe */ }

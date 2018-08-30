@@ -4,6 +4,7 @@ import React, { Component } from 'react'
 import cx from 'classnames'
 
 import FontAwesomeIcon from '../vendor/@fortawesome/react-fontawesome'
+import { showErrorMessage } from '../utils/helpers'
 
 type Props = {
   text?: string,
@@ -15,10 +16,28 @@ class PasteButton extends Component<Props> {
     text: 'Paste',
     className: '',
   }
+
   onClick = (evt: SyntheticEvent<HTMLButtonElement>) => {
-    // TODO
-    alert('todo')
-    // this.props.onClick(clipboard.readText().trim(), evt)
+      try {
+          const isSafari = navigator.appVersion.search('Safari') !== -1 && navigator.appVersion.search('Chrome') === -1 && navigator.appVersion.search('CrMo') === -1
+          if (!isSafari) {
+              navigator.clipboard.readText()
+                  .then(text => {
+                      this.props.onClick(text, evt)
+                  })
+                  .catch(err => {
+                      console.error('Failed to read clipboard contents: ', err)
+                  })
+          } else {
+              const data = new ClipboardEvent('paste')
+              data.clipboardData.getData('text/plain')
+              console.log(data)
+          }
+      } catch (err) {
+          console.error(err)
+          showErrorMessage()
+      }
+
   }
   render() {
     const {

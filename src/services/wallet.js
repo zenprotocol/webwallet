@@ -6,6 +6,7 @@ class _Wallet {
   // used by portfolio store to get balances, might
   // be used by tx history store in the future
   subscribers = []
+  instance = null
   subscribe (fn) {
     this.subscribers.push(fn)
   }
@@ -32,7 +33,7 @@ class _Wallet {
     this.fetchPollManager.stopPolling()
     this.instance = null
   }
-  instance = null
+
   fetch = async () => {
     if (this.instance === null) {
       global.console.warn('create a wallet instance before calling fetch')
@@ -47,6 +48,7 @@ class _Wallet {
     timeoutInterval: 3000,
   })
 }
+
 
 const wallet = new _Wallet()
 

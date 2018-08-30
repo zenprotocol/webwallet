@@ -8,12 +8,12 @@ class SendTxStore {
   @observable to = ''
   @observable amountDisplay = ''
   @observable status = ''
-  @observable inprogress = false
+  @observable inProgress = false
   @observable errorMessage = ''
 
   @action
   async createTransaction(password) {
-    this.inprogress = true
+    this.inProgress = true
     try {
       const response = await wallet.send([{
         address: this.to,
