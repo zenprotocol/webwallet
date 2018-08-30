@@ -10,6 +10,7 @@
     "classnames": "^2.2.6",
     "custom-react-scripts": "0.2.2",
     "decimal.js": "^10.0.1",
+    "eslint": "^5.4.0",
     "flexbox-react": "^4.4.0",
     "history": "^4.7.2",
     "lodash": "^4.17.10",
