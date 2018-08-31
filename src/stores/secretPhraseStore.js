@@ -2,13 +2,10 @@ import { observable, action } from 'mobx'
 import bip39 from 'bip39'
 import { SecurePhrase } from '@zen/zenjs'
 
-
 import routes from '../constants/routes'
 import history from '../services/history'
 import wallet from '../services/wallet'
 import { isDev } from '../utils/helpers'
-
-
 
 const LS_AUTO_LOGOUT_MINUTES = 'autoLogoutMinutes'
 export const LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING = 'encryptedMnemonicPhraseAsString'
@@ -57,13 +54,12 @@ class secretPhraseStore {
     history.push(routes.TERMS_OF_SERVICE)
   }
 
-  @action
   async unlockWallet(password) {
-
       if (!this.isPasswordCorrect(password)){
           this.status = 'error'
           return
       }
+
       if (wallet.instance === null) {
           const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
           this.reset()
