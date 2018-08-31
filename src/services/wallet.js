@@ -27,6 +27,7 @@ class _Wallet {
       new Wallet.RemoteNodeWalletActions('https://remote-node.zp.io')
     )
     this.fetchPollManager.initPolling()
+    console.log('wallet created')
     return this.instance
   }
   destroy() {

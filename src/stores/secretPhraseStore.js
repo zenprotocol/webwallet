@@ -48,7 +48,7 @@ class secretPhraseStore {
   @action
   async importWallet(password) {
     wallet.create(this.mnemonicPhraseAsString, this.networkStore.chain)
-    const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt('1234', 'hello world')
+    const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt(password, this.mnemonicPhrase)
     localStorage.setItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING, encryptedMnemonicPhraseAsString)
     this.mnemonicPhrase = []
     this.isLoggedIn = true
@@ -57,41 +57,26 @@ class secretPhraseStore {
     history.push(routes.TERMS_OF_SERVICE)
   }
 
-  get mnemonicToBuffer() {
-    const buf = this.mnemonicPhrase.map( (x) =>
-        Buffer.from(x, 'ascii'))
-      console.log(buf)
-      return buf
-    }
-
   @action
   async unlockWallet(password) {
+
       if (!this.isPasswordCorrect(password)){
           this.status = 'error'
           return
       }
-
-      // console.log(this.doesWalletExist)
-      // if (this.doesWalletExist){
-      //     console.log('We Inside')
-      //     const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
-      //     if (!decryptedMnemonicPhraseAsString) {
-      //         this.status = 'error'
-      //         return
-      //     }
-      //     wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
-      // }
-    this.isLoggedIn = true
-    this.networkStore.initPolling()
-    if (wallet.instance !== null) {
-        wallet.fetchPollManager.initPolling()
-    }
-    this.activeContractsStore.fetch()
-    if (this.redeemTokensStore.shouldRedeemNonMainnetTokens) {
-      history.push(routes.FAUCET)
-    } else {
-      history.push(routes.PORTFOLIO)
-    }
+      if (wallet.instance === null) {
+          const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
+          this.reset()
+          wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
+      }
+      this.isLoggedIn = true
+      this.networkStore.initPolling()
+      this.activeContractsStore.fetch()
+      if (this.redeemTokensStore.shouldRedeemNonMainnetTokens) {
+        history.push(routes.FAUCET)
+      } else {
+        history.push(routes.PORTFOLIO)
+      }
   }
 
   isPasswordCorrect(password) {
@@ -101,7 +86,7 @@ class secretPhraseStore {
   decryptMnemonicPhrase(password) {
     try {
       // wrong password throws, so returning false to indicate that
-      return SecurePhrase.decrypt(password, localStorage.getItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING))
+      return SecurePhrase.decrypt(password,localStorage.getItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING))
     } catch (err) {
       return false
     }
@@ -132,13 +117,18 @@ class secretPhraseStore {
   }
 
   @action
-  reset() {
+  resetBasic() {
     this.mnemonicPhrase = []
     this.importError = ''
     this.status = ''
     this.isLoggedIn = false
-    wallet.fetchPollManager.stopPolling()
     this.networkStore.stopPolling()
+  }
+  @action
+  reset() {
+    this.resetBasic()
+    wallet.fetchPollManager.stopPolling()
+
   }
 
   @action
