@@ -1,6 +1,5 @@
 import { observable, action } from 'mobx'
 import bip39 from 'bip39'
-import { SecurePhrase } from '@zen/zenjs'
 
 
 import routes from '../constants/routes'
@@ -12,10 +11,10 @@ import { isDev } from '../utils/helpers'
 
 const LS_AUTO_LOGOUT_MINUTES = 'autoLogoutMinutes'
 export const LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING = 'encryptedMnemonicPhraseAsString'
+const LS_PASSWORD = 'thisIsMyStrongestPassword'
 
 class secretPhraseStore {
   // TODO remove after initial version is up
-  // @observable mnemonicPhrase = ["pride", "six", "delay", "awful", "fitness", "sadness", "crush", "school", "tent", "margin", "sweet", "trouble", "avocado", "dove", "liberty", "trumpet", "trick", "neglect", "require", "always", "fringe", "cram", "shadow", "jelly"]
   @observable mnemonicPhrase = []
   @observable isLoggedIn = false
   @observable autoLogoutMinutes = Number(localStorage.getItem(LS_AUTO_LOGOUT_MINUTES)) || 15
@@ -48,8 +47,9 @@ class secretPhraseStore {
   @action
   async importWallet(password) {
     wallet.create(this.mnemonicPhraseAsString, this.networkStore.chain)
-    const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt(password, this.mnemonicPhrase)
-    localStorage.setItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING, encryptedMnemonicPhraseAsString)
+    //const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt(password, this.mnemonicPhrase)
+    localStorage.setItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING, this.mnemonicPhraseAsString)
+    localStorage.setItem(LS_PASSWORD, password)
     this.mnemonicPhrase = []
     this.isLoggedIn = true
     this.networkStore.initPolling()
@@ -64,11 +64,11 @@ class secretPhraseStore {
           this.status = 'error'
           return
       }
-      if (wallet.instance === null) {
-          const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
-          this.reset()
-          wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
-      }
+      // if (wallet.instance === null) {
+      //     const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
+      //     this.reset()
+      //     wallet.create(decryptedMnemonicPhraseAsString, this.networkStore.chain)
+      // }
       this.isLoggedIn = true
       this.networkStore.initPolling()
       this.activeContractsStore.fetch()
@@ -86,7 +86,11 @@ class secretPhraseStore {
   decryptMnemonicPhrase(password) {
     try {
       // wrong password throws, so returning false to indicate that
-      return SecurePhrase.decrypt(password,localStorage.getItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING))
+      // return SecurePhrase.decrypt(password,localStorage.getItem(LS_ENCRYPTED_MNEMONIC_PHRASE_AS_STRING))
+      const LS_Password = localStorage.getItem(LS_PASSWORD)
+        if(LS_Password === password) {
+            return true
+        }
     } catch (err) {
       return false
     }
