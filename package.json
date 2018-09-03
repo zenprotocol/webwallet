@@ -1,5 +1,5 @@
 {
-  "name": "web-wallet-custom-scripts",
+  "name": "zen-web-wallet",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -27,9 +27,12 @@
     "react-idle": "^3.0.0",
     "react-router-dom": "^4.3.1",
     "react-switch": "^3.0.4",
+    "serve": "^10.0.0",
     "sweetalert": "^2.1.0"
   },
   "scripts": {
+    "start:prod": "serve build",
+    "heroku-postbuild": "yarn build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "lint": "node node_modules/eslint/bin/eslint.js --ignore-pattern vendor/ --config node_modules/eslint-config-react-app/index.js src",
