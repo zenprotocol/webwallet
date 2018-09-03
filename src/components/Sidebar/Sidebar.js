@@ -5,9 +5,9 @@ import { Link } from 'react-router-dom'
 import cx from 'classnames'
 
 import FontAwesomeIcon from '../../vendor/@fortawesome/react-fontawesome'
-import NonMainNetBottomBar from '../../components/NonMainNetBottomBar'
+import NetBottomBar from '../../components/NetBottomBar'
 import { WALLET_VERSION } from '../../constants/versions'
-import { MAINNET } from '../../constants/constants'
+import { MAINNET } from '../../services/chain'
 import { LOGO_SRC } from '../../constants/imgSources'
 import routes from '../../constants/routes'
 import NetworkStore from '../../stores/networkStore'
@@ -150,7 +150,7 @@ class Sidebar extends Component<Props> {
         </div>
         <SidebarMenu />
         {this.renderNetworkStatus()}
-        <NonMainNetBottomBar width={SIDEBAR_WIDTH} />
+        <NetBottomBar width={SIDEBAR_WIDTH} isSidebar />
       </nav>
     )
   }

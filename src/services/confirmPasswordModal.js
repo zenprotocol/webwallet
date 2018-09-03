@@ -3,7 +3,7 @@
 import swal from 'sweetalert'
 
 import { networkStore, secretPhraseStore } from '../stores'
-import { MAINNET } from '../constants/constants'
+import { MAINNET } from '../services/chain'
 
 const passwordModal = async () => {
   const submittedPassword = await submitPasswordModal()

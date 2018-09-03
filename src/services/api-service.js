@@ -1,10 +1,19 @@
 // @flow
 import axios from 'axios'
 
-const instance = axios.create({
+import chain, { MAINNET } from './chain'
+
+const mainnetInstance = axios.create({
   baseURL: 'https://remote-node.zenprotocol.com/api/',
-  headers: {'Access-Control-Allow-Origin': 'foobar'}
+  headers: {'Access-Control-Allow-Origin': '*'}
 })
+
+const testnetInstance = axios.create({
+  baseURL: 'https://testnet-remote-node.zp.io/api/',
+  headers: {'Access-Control-Allow-Origin': '*'}
+})
+
+const getInstance = () => chain.current === MAINNET ? mainnetInstance : testnetInstance
 
 // const crowdsaleServerAddress = getCrowdsaleServerAddress()
 
@@ -30,7 +39,7 @@ export async function postTransaction(tx: Transaction & Password): Promise<strin
     password,
   }
 
-  const response = await instance.post('send', data, {
+  const response = await getInstance().post('send', data, {
     headers: { 'Content-Type': 'application/json' },
   })
 
@@ -45,7 +54,7 @@ type ActiveContract = {
   code: string
 };
 export async function getActiveContracts(): Promise<ActiveContract[]> {
-  const response = await instance.get('activecontracts')
+  const response = await getInstance().get('activecontracts')
   return response.data
 }
 
@@ -69,7 +78,7 @@ export type TransactionResponse = {
 export async function getTxHistory({
   skip, take,
 }: TransactionRequest = {}): Promise<TransactionResponse[]> {
-  const response = await instance.get(`history?skip=${skip}&take=${take}`, {
+  const response = await getInstance().get(`history?skip=${skip}&take=${take}`, {
     headers: { 'Content-Type': 'application/json' },
   })
   return response.data
@@ -83,7 +92,7 @@ type BlockChainInfo = {
   medianTime: number
 };
 export async function getNetworkStatus(): Promise<BlockChainInfo> {
-  const response = await instance.get('info')
+  const response = await getInstance().get('info')
   return response.data
 }
 
@@ -99,13 +108,13 @@ export async function getCheckCrowdsaleTokensEntitlement(
 
   // const url = `${crowdsaleServerAddress}/check_crowdsale_tokens_entitlement?pubkey_base_64=${pubkey_base_64}&pubkey_base_58=${pubkey_base_58}`
 
-  // const response = await instance.get(url)
+  // const response = await getInstance().get(url)
   // console.log('getCheckCrowdsaleTokensEntitlement response', response)
   // return response.data
 }
 
 export async function postRedeemCrowdsaleTokens(data: *) {
-  // const response = await instance.post(`${crowdsaleServerAddress}/redeem_crowdsale_tokens`, data, {
+  // const response = await getInstance().post(`${crowdsaleServerAddress}/redeem_crowdsale_tokens`, data, {
   //   headers: { 'Content-Type': 'application/json' },
   // })
 

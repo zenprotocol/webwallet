@@ -1,6 +1,6 @@
 import { observable, action, runInAction } from 'mobx'
 
-import { MAINNET } from '../constants/constants'
+import { MAINNET } from '../services/chain'
 import { getCheckCrowdsaleTokensEntitlement, postRedeemCrowdsaleTokens } from '../services/api-service'
 
 const LS_ALREADY_REDEEMED_TOKENS = 'alreadyRedeemedTokens'

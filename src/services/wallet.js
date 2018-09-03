@@ -2,6 +2,8 @@ import { Wallet } from '@zen/zenjs'
 
 import PollManager from '../utils/PollManager'
 
+import chain, { MAINNET } from './chain'
+
 class _Wallet {
   // used by portfolio store to get balances, might
   // be used by tx history store in the future
@@ -9,21 +11,15 @@ class _Wallet {
   subscribe (fn) {
     this.subscribers.push(fn)
   }
-  create (mnemonic, chain) {
-    // normalize the chain due to inconsistencies of API, sometimes using main, sometimes mainnet
-    if (chain.includes('main')) {
-      chain = 'main'
-    } else if (chain.includes('test')) {
-      chain = 'test'
-    }
+  create (mnemonic) {
     if (this.instance !== null) {
       global.console.warn('wallet instance already exists')
       return
     }
     this.instance = Wallet.fromMnemonic(
       mnemonic,
-      chain,
-      new Wallet.RemoteNodeWalletActions('https://remote-node.zp.io')
+      chain.current,
+      new Wallet.RemoteNodeWalletActions(chain.current === MAINNET ? 'https://remote-node.zp.io' : 'https://testnet-remote-node.zp.io')
     )
     this.fetchPollManager.initPolling()
     return this.instance

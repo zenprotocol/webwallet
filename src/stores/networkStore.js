@@ -1,13 +1,13 @@
 import { observable, action, runInAction, computed } from 'mobx'
 
 import PollManager from '../utils/PollManager'
-import { LOCALNET, TESTNET, MAINNET } from '../constants/constants'
+import { TESTNET, MAINNET } from '../services/chain'
 import { getNetworkStatus } from '../services/api-service'
+import chain from '../services/chain'
 
 const initialState = getInitialState()
 
 class NetworkStore {
-  @observable chain = initialState.chain
   @observable blocks = initialState.blocks
   @observable headers = initialState.headers
   @observable difficulty = initialState.difficulty
@@ -34,9 +34,6 @@ class NetworkStore {
     try {
       const result = this.protectResult(await getNetworkStatus())
       runInAction(() => {
-        // since the API returns 'main' for mainnet but 'testnet' for testnet, we
-        // normalize the value we save on this.chain, for consistency in the UI
-        this.chain = this.formatChainResult(result.chain)
         this.blocks = result.blocks
         this.headers = result.headers
         this.difficulty = result.difficulty
@@ -101,17 +98,8 @@ class NetworkStore {
     return 'GH/s'
   }
 
-
-  formatChainResult(chainResult) {
-    if (chainResult === 'main') {
-      return MAINNET
-    }
-    if (chainResult === 'local') {
-      return LOCALNET
-    }
-    if (chainResult === 'testnet') {
-      return TESTNET
-    }
+  get chain() {
+    return chain.current
   }
 }
 
@@ -119,7 +107,6 @@ export default NetworkStore
 
 function getInitialState() {
   return {
-    chain: 'main',
     blocks: 0,
     headers: 0,
     difficulty: 0,

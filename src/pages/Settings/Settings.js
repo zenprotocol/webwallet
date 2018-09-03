@@ -7,6 +7,8 @@ import Flexbox from 'flexbox-react'
 import SecretPhraseStore from '../../stores/secretPhraseStore'
 import NetworkStore from '../../stores/networkStore'
 import Layout from '../../components/Layout'
+import { MAINNET } from '../../services/chain'
+import switchChain from '../../utils/switchChainModal'
 
 import showSeed from './showSeedUtil'
 import logout from './logoutUtil'
@@ -49,6 +51,27 @@ class Settings extends Component<Props> {
     )
   }
 
+  renderChain() {
+    const { networkStore } = this.props
+    return (
+      <Flexbox className="row">
+        <Flexbox flexDirection="column" className="description">
+          <h2 className="description-title">Switch Network</h2>
+          <p>
+            You are currently on {networkStore.chain}net.
+            Switch to {networkStore.otherChain}net to
+            {' '} {networkStore.otherChain === MAINNET
+          ? 'interact with the main network'
+        : 'test your actions'}
+          </p>
+        </Flexbox>
+        <Flexbox flexDirection="column" className="actions">
+          <button className="btn-block" onClick={switchChain}>Switch to {networkStore.otherChain}net</button>
+        </Flexbox>
+      </Flexbox>
+    )
+  }
+
   renderShowSeed() {
     return (
       <Flexbox className="row">
@@ -82,6 +105,7 @@ class Settings extends Component<Props> {
           <h1>General settings</h1>
         </Flexbox>
         {this.renderAutoLogout()}
+        {this.renderChain()}
         {this.renderShowSeed()}
         {this.renderLogout()}
       </Layout>
