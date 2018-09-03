@@ -18,7 +18,7 @@ class secretPhraseStore {
   // @observable mnemonicPhrase = []
   @observable isLoggedIn = false
   @observable autoLogoutMinutes = Number(localStorage.getItem(LS_AUTO_LOGOUT_MINUTES)) || 15
-  @observable inprogress = false
+  @observable inProgress = false
   @observable isImporting = false
   @observable importError = ''
   @observable status = ''

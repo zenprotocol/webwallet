@@ -10,6 +10,7 @@ import Layout from '../../components/Layout'
 import { MAINNET } from '../../services/chain'
 import switchChain from '../../utils/switchChainModal'
 
+import wipeLocalStorage from './wipeLocalStorageUtil'
 import showSeed from './showSeedUtil'
 import logout from './logoutUtil'
 import './Settings.scss'
@@ -98,7 +99,22 @@ class Settings extends Component<Props> {
       </Flexbox>
     )
   }
-  render() {
+  renderWipe() {
+      return (
+          <Flexbox className="row">
+              <Flexbox flexDirection="column" className="description">
+                  <h2 className="description-title">Wipe your storage</h2>
+                  <p>
+                      Wipe your storage if want to create or import a new wallet
+                  </p>
+              </Flexbox>
+              <Flexbox flexDirection="column" className="actions">
+                  <button className="secondary" onClick={wipeLocalStorage}>Wipe your storage</button>
+              </Flexbox>
+          </Flexbox>
+      )
+  }
+  render(){
     return (
       <Layout className="settings-page">
         <Flexbox className="page-title">
@@ -108,6 +124,7 @@ class Settings extends Component<Props> {
         {this.renderChain()}
         {this.renderShowSeed()}
         {this.renderLogout()}
+        {this.renderWipe()}
       </Layout>
     )
   }

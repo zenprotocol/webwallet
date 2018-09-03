@@ -13,7 +13,7 @@ class RedeemTokensStore {
   @observable amountRedeemable
   @observable alreadyRedeemed = false
   @observable anyOrders = false
-  @observable inprogress = false
+  @observable inProgress = false
   @observable checkingTokenEntitlement = false
   @observable redeemingTokens = false
   @observable pubkey = false
@@ -24,7 +24,7 @@ class RedeemTokensStore {
   }
   @action
   async checkCrowdsaleTokensEntitlement() {
-    this.inprogress = true
+    this.inProgress = true
     this.checkingTokenEntitlement = true
 
     try {
@@ -35,12 +35,12 @@ class RedeemTokensStore {
         this.anyOrders = response.any_orders
         this.alreadyRedeemed = response.already_redeemed
         this.amountRedeemable = response.amount_redeemable
-        this.inprogress = false
+        this.inProgress = false
         this.checkingTokenEntitlement = false
       })
     } catch (error) {
       this.checkingTokenEntitlement = false
-      this.inprogress = false
+      this.inProgress = false
       runInAction(() => {
         console.log('getCheckCrowdsaleTokensEntitlement error', error)
       })
@@ -50,7 +50,7 @@ class RedeemTokensStore {
 
   @action
   async redeemCrowdsaleTokens() {
-    this.inprogress = true
+    this.inProgress = true
     this.redeemingTokens = true
 
     this.anyOrders = false
@@ -63,7 +63,7 @@ class RedeemTokensStore {
         wallet_public_address: this.walletPublicAddress,
       })
       runInAction(() => {
-        this.inprogress = false
+        this.inProgress = false
         this.redeemingTokens = false
         if (response.status === 'success') {
           console.log('postRedeemCrowdsaleTokens response.status', response.status)
@@ -81,7 +81,7 @@ class RedeemTokensStore {
       })
     } catch (error) {
       runInAction(() => {
-        this.inprogress = false
+        this.inProgress = false
         this.redeemingTokens = false
         console.log('postRedeemCrowdsaleTokens error', error)
       })
@@ -96,7 +96,7 @@ class RedeemTokensStore {
     this.amountRedeemable = ''
     this.alreadyRedeemed = false
     this.anyOrders = false
-    this.inprogress = false
+    this.inProgress = false
     this.checkingTokenEntitlement = false
     this.redeemingTokens = false
     this.pubkey = false

@@ -9,8 +9,8 @@ import FontAwesomeIcon from '../../vendor/@fortawesome/react-fontawesome'
 import NetBottomBar from '../../components/NetBottomBar'
 import ToggleVisibilityIcon from '../../components/ToggleVisibilityIcon'
 import SecretPhraseStore from '../../stores/secretPhraseStore'
+import wipeLocalStorage from "../Settings/wipeLocalStorageUtil"
 
-import forgotPasswordModal from './forgotPasswordModal'
 
 type Props = {
   secretPhraseStore: SecretPhraseStore
@@ -44,8 +44,8 @@ class UnlockWallet extends Component<Props, State> {
   }
 
   renderButtonIcon() {
-    const { inprogress } = this.props.secretPhraseStore
-    if (inprogress) {
+    const { inProgress } = this.props.secretPhraseStore
+    if (inProgress) {
       return (<FontAwesomeIcon icon={['far', 'spinner-third']} spin />)
     }
     return (<FontAwesomeIcon icon={['far', 'unlock']} />)
@@ -65,7 +65,7 @@ class UnlockWallet extends Component<Props, State> {
 
   render() {
     const { password, hidePassword } = this.state
-    const { status, inprogress } = this.props.secretPhraseStore
+    const { status, inProgress } = this.props.secretPhraseStore
 
     return (
       <Flexbox flexDirection="column" className="loading-container">
@@ -91,17 +91,15 @@ class UnlockWallet extends Component<Props, State> {
               </div>
               { this.renderErrorMessage() }
             </Flexbox>
-
             <button
               className="unlock btn-block"
-              disabled={(password.length < 4 || inprogress)}
+              disabled={(password.length < 4 || inProgress)}
             >
-              <span>{ inprogress ? 'Unlocking' : 'Unlock' }</span>
+              <span>{ inProgress ? 'Unlocking' : 'Unlock' }</span>
               { this.renderButtonIcon() }
             </button>
           </form>
-
-          <a style={{ textDecoration: 'underline' }} onClick={forgotPasswordModal} className="forgot-password">
+          <a style={{ textDecoration: 'underline' }} onClick={wipeLocalStorage} className="wipe-local-storage">
             Forgot your password? Import your wallet again or create a new one
           </a>
           {/* $FlowFixMe */ }

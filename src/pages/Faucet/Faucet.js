@@ -77,8 +77,8 @@ class Faucet extends Component<Props> {
   }
 
   isSubmitButtonDisabled() {
-    const { inprogress, redeemingTokens } = this.props.redeemTokensStore
-    return redeemingTokens || inprogress || !this.isRedeemable
+    const { inProgress, redeemingTokens } = this.props.redeemTokensStore
+    return redeemingTokens || inProgress || !this.isRedeemable
   }
 
   get isRedeemable() {
@@ -117,10 +117,10 @@ class Faucet extends Component<Props> {
 
   renderRedeemMessage() {
     const {
-      anyOrders, alreadyRedeemed, amountRedeemable, inprogress, pubkeyIsValid,
+      anyOrders, alreadyRedeemed, amountRedeemable, inProgress, pubkeyIsValid,
     } = this.props.redeemTokensStore
 
-    if (pubkeyIsValid && !inprogress) {
+    if (pubkeyIsValid && !inProgress) {
       if (anyOrders && amountRedeemable > 0) {
         if (alreadyRedeemed) {
           return (
