@@ -2,6 +2,7 @@
 
 import React, { Component } from 'react'
 import cx from 'classnames'
+import clipboard from "clipboard-polyfill"
 
 import FontAwesomeIcon from '../vendor/@fortawesome/react-fontawesome'
 
@@ -16,9 +17,8 @@ class PasteButton extends Component<Props> {
     className: '',
   }
   onClick = (evt: SyntheticEvent<HTMLButtonElement>) => {
-    // TODO
-    alert('todo')
-    // this.props.onClick(clipboard.readText().trim(), evt)
+    clipboard.readText().then((result) =>
+            this.props.onClick(result.trim(), evt))
   }
   render() {
     const {

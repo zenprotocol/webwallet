@@ -1,6 +1,7 @@
 // @flow
 
 import React from 'react'
+import clipboard from "clipboard-polyfill"
 
 import FontAwesomeIcon from '../vendor/@fortawesome/react-fontawesome'
 import ExternalLink from '../components/ExternalLink'
@@ -24,8 +25,7 @@ class CopyableTableCell extends React.Component<Props, State> {
     clearTimeout(this.copyTimeout)
   }
   copyToClipboard = (string: string) => {
-    // TODO
-    // clipboard.writeText(string)
+    clipboard.writeText(string)
     this.setState({ copyText: 'Copied to Clipboard' })
     this.copyTimeout = setTimeout(() => {
       this.setState({ copyText: 'Copy' })

@@ -3,6 +3,7 @@
 import randomstring from 'randomstring'
 import * as React from 'react'
 import cx from 'classnames'
+import clipboard from "clipboard-polyfill"
 
 const CopyContext = React.createContext()
 
@@ -96,10 +97,8 @@ class Copy extends React.Component<Props, State> {
   }
   onCopy = () => {
     this.clearTimeout() // in case of multiple onCopy events
-    const { timeoutMilliseconds } = this.props
-    // const { valueToCopy, timeoutMilliseconds } = this.props
-    // TODO
-    // clipboard.writeText(valueToCopy)
+    const { valueToCopy, timeoutMilliseconds } = this.props
+    clipboard.writeText(valueToCopy)
     this.setState({ isActive: true })
     this.copyTimeout = setTimeout(this.setNonActive, timeoutMilliseconds)
     this.highlightInput()
@@ -122,7 +121,7 @@ class Copy extends React.Component<Props, State> {
     onCopy: this.onCopy,
   }
   render() {
-    const { timeoutMilliseconds, valueToCopy, ...remainingProps } = this.props // eslint-disable-line max-len,no-unused-vars
+    const { valueToCopy, ...remainingProps } = this.props // eslint-disable-line max-len,no-unused-vars
     return (
       <CopyContext.Provider
         value={{
