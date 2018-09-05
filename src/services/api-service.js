@@ -4,7 +4,7 @@ import axios from 'axios'
 import chain, { MAINNET } from './chain'
 
 const mainnetInstance = axios.create({
-  baseURL: 'https://remote-node.zenprotocol.com/api/',
+  baseURL: 'https://remote-node.zp.io/api/',
   headers: {'Access-Control-Allow-Origin': '*'}
 })
 
