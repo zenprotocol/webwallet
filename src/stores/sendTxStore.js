@@ -12,10 +12,10 @@ class SendTxStore {
   @observable errorMessage = ''
 
   @action
-  async createTransaction(password) {
+  async createTransaction() {
     this.inProgress = true
     try {
-      const response = await wallet.send([{
+      const response = await wallet.instance.send([{
         address: this.to,
         asset: this.asset,
         amount: isZenAsset(this.asset) ? zenToKalapas(this.amount) : this.amount,

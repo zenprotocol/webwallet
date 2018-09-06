@@ -91,8 +91,8 @@ class SendTx extends Component<Props> {
     )
   }
 
-  onSubmitButtonClicked = async (confirmedPassword: string) => {
-    this.props.sendTxStore.createTransaction(confirmedPassword)
+  onSubmitButtonClicked = async () => {
+    this.props.sendTxStore.createTransaction()
     // $FlowFixMe
     this.AutoSuggestAssets.wrappedInstance.reset()
   }

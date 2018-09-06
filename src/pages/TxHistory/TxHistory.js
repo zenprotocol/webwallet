@@ -76,7 +76,7 @@ class TxHistory extends Component<Props> {
             </thead>
             <tbody>
               { this.renderRows() }
-              {/* { txHistoryStore.isFetching && this.renderLoadingTransactions() } */}
+              { txHistoryStore.isFetching && this.renderLoadingTransactions() }
             </tbody>
           </table>
         </Flexbox>

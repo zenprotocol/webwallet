@@ -1,7 +1,7 @@
 // @flow
 import { observable, action, runInAction } from 'mobx'
 
-import { getTxHistory } from '../services/api-service'
+import wallet from '../services/wallet'
 import PollManager from '../utils/PollManager'
 
 class TxHistoryStore {
@@ -40,9 +40,7 @@ class TxHistoryStore {
     if (this.isFetching) { return }
     this.isFetching = true
     try {
-      const result = await getTxHistory({
-        skip: this.skip, take: this.currentPageSize + this.batchSize,
-      })
+      const result = await wallet.instance.getTransactions()
       runInAction(() => {
         if (result.length) {
           this.currentPageSize = result.length

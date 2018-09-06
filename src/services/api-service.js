@@ -18,34 +18,8 @@ const getInstance = () => chain.current === MAINNET ? mainnetInstance : testnetI
 // const crowdsaleServerAddress = getCrowdsaleServerAddress()
 
 type Hash = string;
+
 type Address = string;
-
-type Transaction = {
-  to: Address,
-  asset: Hash,
-  amount: number
-};
-type Password = { password: string };
-export async function postTransaction(tx: Transaction & Password): Promise<string> {
-  const {
-    password, to, asset, amount,
-  } = tx
-  const data = {
-    outputs: [{
-      asset,
-      address: to,
-      amount,
-    }],
-    password,
-  }
-
-  const response = await getInstance().post('send', data, {
-    headers: { 'Content-Type': 'application/json' },
-  })
-
-  return response.data
-}
-
 
 type ActiveContract = {
   contractId: Hash,
@@ -53,34 +27,9 @@ type ActiveContract = {
   expire: number,
   code: string
 };
+
 export async function getActiveContracts(): Promise<ActiveContract[]> {
   const response = await getInstance().get('activecontracts')
-  return response.data
-}
-
-type TransactionRequest = {
-  skip: number,
-  take: number
-};
-
-export type TransactionDelta = {
-  asset: string,
-  amount: number
-};
-
-export type TransactionResponse = {
-  txHash: Hash,
-  asset: string,
-  amount: number,
-  confirmations: number
-};
-
-export async function getTxHistory({
-  skip, take,
-}: TransactionRequest = {}): Promise<TransactionResponse[]> {
-  const response = await getInstance().get(`history?skip=${skip}&take=${take}`, {
-    headers: { 'Content-Type': 'application/json' },
-  })
   return response.data
 }
 

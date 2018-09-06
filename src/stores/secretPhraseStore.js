@@ -13,9 +13,7 @@ const LS_TESTNET_SEED = 'lsTestnetSeed'
 const LS_MAINNET_SEED = 'lsMainnetSeed'
 
 class secretPhraseStore {
-  // TODO remove after initial version is up
-  @observable mnemonicPhrase = ["pride", "six", "delay", "awful", "fitness", "sadness", "crush", "school", "tent", "margin", "sweet", "trouble", "avocado", "dove", "liberty", "trumpet", "trick", "neglect", "require", "always", "fringe", "cram", "shadow", "jelly"]
-  // @observable mnemonicPhrase = []
+  @observable mnemonicPhrase = []
   @observable isLoggedIn = false
   @observable autoLogoutMinutes = Number(localStorage.getItem(LS_AUTO_LOGOUT_MINUTES)) || 15
   @observable inProgress = false
