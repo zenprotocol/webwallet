@@ -11,7 +11,6 @@ import history from '../../services/history'
 import routes from '../../constants/routes'
 import { ref } from '../../utils/domUtils'
 import { MAINNET } from '../../services/chain'
-import ExternalLink from '../../components/ExternalLink'
 import Layout from '../../components/Layout'
 import PasteButton from '../../components/PasteButton'
 import FormResponseMessage from '../../components/FormResponseMessage'
@@ -222,10 +221,10 @@ class Faucet extends Component<Props> {
               If you didn&apos;t save your key contact our support team at <a href="mailto:info@zenprotocol.com">info@zenprotocol.com</a> and we&apos;ll help you retrieve it
               <br />
               You can also retrieve it by visiting&nbsp;
-              <ExternalLink
-                link="https://crowdsale.zenprotocol.com/create-wallet/complete"
-              >this link
-              </ExternalLink> in the same browser you made your purchase from.
+              <a target='_blank' rel='noreferrer noopener'
+                href='https://crowdsale.zenprotocol.com/create-wallet/complete'>
+                this link
+              </a> in the same browser you made your purchase from.
             </h3>
           </Flexbox>
 
@@ -260,10 +259,10 @@ class Faucet extends Component<Props> {
             <Flexbox>
               <h3 className="agree-to-terms">
                 * By claiming your tokens you agree to the&nbsp;
-                <ExternalLink
-                  link="https://www.zenprotocol.com/legal/zen_protocol_token_sale_agreement.pdf"
-                >Software License Terms
-                </ExternalLink>.
+                <a target='_blank' rel='noreferrer noopener'
+                  href='https://www.zenprotocol.com/legal/zen_protocol_token_sale_agreement.pdf'>
+                  Software License Terms
+                </a>.
               </h3>
             </Flexbox>
 

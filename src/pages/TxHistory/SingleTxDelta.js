@@ -6,7 +6,6 @@ import cx from 'classnames'
 
 import { normalizeTokens, isZenAsset } from '../../utils/zenUtils'
 import CopyableTableCell from '../../components/CopyableTableCell'
-import ExternalLink from '../../components/ExternalLink'
 import NetworkStore from '../../stores/networkStore'
 
 type Props = {
@@ -40,9 +39,10 @@ class SingleTxDelta extends React.Component<Props> {
         <CopyableTableCell string={asset} />
         <td>{this.assetName}</td>
         <td>
-          <ExternalLink link={`https://zp.io/blocks/${this.blockNumber}`}>
+          <a target='_blank' rel='noreferrer noopener' 
+            href={`https://zp.io/blocks/${this.blockNumber}`}>
             {this.blockNumber}
-          </ExternalLink>
+          </a>
         </td>
         <td>{confirmations}</td>
         <td

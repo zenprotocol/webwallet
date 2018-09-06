@@ -14,7 +14,6 @@ import SecretPhraseStore from '../../stores/secretPhraseStore'
 import PasteButton from '../../components/PasteButton'
 import ResetButton from '../../components/ResetButton'
 import SeedInput from '../../components/SeedInput'
-import ExternalLink from '../../components/ExternalLink'
 import OnBoardingLayout from '../Layout/Layout'
 
 const getInitialInputsState = () => _.range(24).map(() => '')
@@ -113,10 +112,10 @@ class ImportWallet extends Component<Props, State> {
           Please enter your 24 word secret phrase (seed).
           <br />
           A blue check will apear if the text you entered is a valid&nbsp;
-          <ExternalLink
-            link="https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt"
-          >bip39 word
-          </ExternalLink>.
+          <a target='_blank' rel='noreferrer noopener'
+            href="https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt">
+            bip39 word
+          </a>.
         </h3>
 
         <div className="devider after-title" />

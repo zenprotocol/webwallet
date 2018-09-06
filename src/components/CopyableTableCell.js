@@ -4,7 +4,6 @@ import React from 'react'
 import clipboard from "clipboard-polyfill"
 
 import FontAwesomeIcon from '../vendor/@fortawesome/react-fontawesome'
-import ExternalLink from '../components/ExternalLink'
 import { truncateString } from '../utils/helpers'
 import { isZenAsset } from '../utils/zenUtils'
 
@@ -39,9 +38,10 @@ class CopyableTableCell extends React.Component<Props, State> {
   renderString() {
     const { string, istx } = this.props
     return istx ? (
-      <ExternalLink link={`https://zp.io/tx/${string}`}>
+      <a target='_blank' rel='noreferrer noopener'
+        href={`https://zp.io/tx/${string}`}>
         {this.formattedString}
-      </ExternalLink>
+      </a>
     ) : this.formattedString
   }
 
