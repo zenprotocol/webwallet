@@ -1,6 +1,6 @@
 import { observable, action } from 'mobx'
 import bip39 from 'bip39'
-// import { SecurePhrase } from '@zen/zenjs' // temp until encryption works
+import { SecurePhrase } from '@zen/zenjs'
 
 import routes from '../constants/routes'
 import history from '../services/history'
@@ -45,8 +45,8 @@ class secretPhraseStore {
   @action
   async importWallet(password) {
     wallet.create(this.mnemonicPhraseAsString)
-    localStorage.setItem(this.lsSeedKey, this.mnemonicPhraseAsString)
-    localStorage.setItem('password', password) // Temporary until encryption works
+    const encryptedMnemonicPhraseAsString = SecurePhrase.encrypt(password, this.mnemonicPhraseAsString)
+    localStorage.setItem(this.lsSeedKey, encryptedMnemonicPhraseAsString)
     this.mnemonicPhrase = []
     this.isLoggedIn = true
     this.networkStore.initPolling()
@@ -61,7 +61,12 @@ class secretPhraseStore {
       this.status = 'error'
       return
     }
-    wallet.create(localStorage.getItem(this.lsSeedKey))
+    const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
+    if (!decryptedMnemonicPhraseAsString) {
+        this.status = 'error'
+        return
+    }
+    wallet.create(decryptedMnemonicPhraseAsString)
     this.isLoggedIn = true
     this.networkStore.initPolling()
     this.activeContractsStore.fetch()
@@ -73,19 +78,25 @@ class secretPhraseStore {
   }
 
   isPasswordCorrect(password) {
-    return localStorage.getItem('password') === password // Temporary until encryption works
-    // return !!this.decryptMnemonicPhrase(password)
+     return !!this.decryptMnemonicPhrase(password)
   }
 
   get mnemonicPhraseAsString() {
     return this.mnemonicPhrase.join(' ')
   }
 
-  @action
-  unlockWalletClearForm() {
-    this.status = ''
+  decryptMnemonicPhrase(password) {
+      try {
+          // wrong password throws, so returning false to indicate that
+          return SecurePhrase.decrypt(password, localStorage.getItem(this.lsSeedKey)).toString()
+      } catch (err) {
+          return false
+      }
   }
-
+  @action
+      unlockWalletClearForm() {
+          this.status = ''
+      }
   @action
   setAutoLogoutMinutes(minutes) {
     minutes = Number(minutes)

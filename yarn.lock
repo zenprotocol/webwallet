@@ -45,9 +45,9 @@
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@zeit/schemas/-/schemas-2.1.1.tgz#bca9d84df177c85f2d2a7dad37512f384761b23d"
 
-"@zen/zenjs@^0.0.18":
-  version "0.0.18"
-  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.18.tgz#f78e197510a190ed66bada588571d4200011ecd3"
+"@zen/zenjs@^0.0.19":
+  version "0.0.19"
+  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.19.tgz#79a64ad1a0a0586f3b12dc5fbad31d16f6e5a9ab"
   dependencies:
     aes-js "^3.1.1"
     axios "^0.18.0"
