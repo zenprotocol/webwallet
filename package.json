@@ -2,6 +2,9 @@
   "name": "zen-web-wallet",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "yarn": "1.9.4"
+  },
   "dependencies": {
     "@zen/zenjs": "^0.0.18",
     "autoprefixer": "7.1.2",
