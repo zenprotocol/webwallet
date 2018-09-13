@@ -6,7 +6,7 @@ import cx from 'classnames'
 
 import FontAwesomeIcon from '../../vendor/@fortawesome/react-fontawesome'
 import NetBottomBar from '../../components/NetBottomBar'
-import { WALLET_VERSION } from '../../constants/versions'
+import { WALLET_VERSION, ZEN_JS_VERSION } from '../../constants/versions'
 import { MAINNET } from '../../services/chain'
 import { LOGO_SRC } from '../../constants/imgSources'
 import routes from '../../constants/routes'
@@ -77,6 +77,15 @@ class Sidebar extends Component<Props> {
     )
   }
 
+  renderZenJsVersion() {
+      return (
+          <div className="network-data-point">
+              <span className="data-name" title="Wallet Version">Zenjs Version: </span>
+              <span className="data-point">{ZEN_JS_VERSION}</span>
+          </div>
+      )
+  }
+
   rednerHashingPower() {
     const { hashrateByUnit, hashrateUnit } = this.props.networkStore
     return (
@@ -132,6 +141,7 @@ class Sidebar extends Component<Props> {
           <span className="data-point">{this.formattedBlockchainTime()}</span>
         </div>
         { this.renderVersions() }
+        { this.renderZenJsVersion()}
         <div className={this.bottomDataClassName}>
           { this.renderSyncingStatus() }
         </div>

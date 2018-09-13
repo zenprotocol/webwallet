@@ -29,7 +29,6 @@ class SingleTxDelta extends React.Component<Props> {
   }
   get assetName() {
       const { asset } = this.props.tx
-
       return this.props.portfolioStore.getAssetName(asset)
   }
   get blockNumber() {
