@@ -3,7 +3,7 @@ import { find } from 'lodash'
 
 import wallet from '../services/wallet'
 import { zenBalanceDisplay, kalapasToZen, isZenAsset } from '../utils/zenUtils'
-import { numberWithCommas } from '../utils/helpers'
+import {getNamefromCodeComment, numberWithCommas} from '../utils/helpers'
 import { ZEN_ASSET_NAME, ZEN_ASSET_HASH } from '../constants/constants'
 
 class PortfolioStore {
@@ -24,18 +24,7 @@ class PortfolioStore {
                 balance: balance[key]
             }
         })
-        console.log(rawAssets)
         runInAction(() => this.rawAssets = rawAssets)
-        // if there's a balance without asset name, check ACS if matching contract exists
-        // if it does, save it to LocalStorage
-        rawAssets.filter(asset => !this.getAssetName(asset.asset))
-            .forEach(asset => {
-                const matchingActiveContract =
-                    this.activeContractsStore.activeContracts.find(ac => ac.contractId === asset.asset)
-                if (matchingActiveContract) {
-                    //
-                }
-            })
     }
 
     fetch() {
@@ -46,7 +35,10 @@ class PortfolioStore {
         if (asset === ZEN_ASSET_HASH) {
             return ZEN_ASSET_NAME
         }
-        // TODO
+        const matchingActiveContract = this.activeContractsStore.activeContracts.find(ac => ac.contractId === asset)
+        if (matchingActiveContract) {
+            return getNamefromCodeComment(matchingActiveContract.code)
+        }
         return ''
     }
 

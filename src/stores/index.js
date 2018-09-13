@@ -15,4 +15,4 @@ export const redeemTokensStore = new RedeemTokensStore(networkStore)
 export const secretPhraseStore =
   new SecretPhraseStore(networkStore, portfolioStore, activeContractsStore, redeemTokensStore)
 export const sendTxStore = new SendTxStore()
-export const txHistoryStore = new TxHistoryStore()
+export const txHistoryStore = new TxHistoryStore(networkStore)

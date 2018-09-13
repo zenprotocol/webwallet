@@ -7,9 +7,12 @@ import cx from 'classnames'
 import { normalizeTokens, isZenAsset } from '../../utils/zenUtils'
 import CopyableTableCell from '../../components/CopyableTableCell'
 import NetworkStore from '../../stores/networkStore'
+import PortfolioStore from "../../stores/portfolioStore"
+
 
 type Props = {
   networkStore: NetworkStore,
+  portfolioStore: PortfolioStore,
   tx: {
     confirmations: number,
     amount: number,
@@ -17,7 +20,7 @@ type Props = {
   }
 };
 
-@inject('networkStore')
+@inject('networkStore','portfolioStore')
 @observer
 class SingleTxDelta extends React.Component<Props> {
   get displayAmount() {
@@ -25,8 +28,9 @@ class SingleTxDelta extends React.Component<Props> {
     return normalizeTokens(amount, isZenAsset(asset))
   }
   get assetName() {
-    // TODO
-    return ''
+      const { asset } = this.props.tx
+
+      return this.props.portfolioStore.getAssetName(asset)
   }
   get blockNumber() {
     const { networkStore, tx } = this.props
