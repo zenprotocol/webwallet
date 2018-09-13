@@ -5,6 +5,7 @@ export default {
   SEND_TX: '/send-tx',
   TX_HISTORY: '/tx-history',
   ACTIVE_CONTRACTS: '/active-contracts',
+  EXECUTE_CONTRACT: '/execute-contract',
   FAUCET: '/faucet',
   LOADING: '/loading',
   UNLOCK_WALLET: '/unlock-wallet',
