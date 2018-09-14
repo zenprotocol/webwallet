@@ -13,6 +13,9 @@ class Loading extends Component {
   }
 
   componentDidMount() {
+    if (isMobile()) {
+      return
+    }
     load()
     this.timeout = setTimeout(() => {
       this.setState({ shouldDisplayLoading: true })
@@ -24,18 +27,34 @@ class Loading extends Component {
   }
 
   render() {
-    const { shouldDisplayLoading } = this.state
     return (
       <Flexbox flexDirection="column" className="loading-container">
         <Flexbox flexDirection="column" className="center">
           <img className="zen-logo" src={LOGO_GIF_SRC} alt="Zen Protocol Logo" />
-          <h1>Welcome to Zen Protocol</h1>
-          <p>Loading, please wait</p>
-          {shouldDisplayLoading && <img className="loading-dots" src={LOADING_GIF_SRC} alt="Loading Gif" />}
+          {isMobile() ? this.renderMobileMsg : this.renderLoadingMsg}
         </Flexbox>
       </Flexbox>
+    )
+  }
+  
+  get renderMobileMsg() {
+    return <p>Zen web wallet is not supported on mobile. <br />Please use a laptop or desktop computer</p>
+  }
+  
+  get renderLoadingMsg() {
+    const { shouldDisplayLoading } = this.state
+    return (
+      <div>
+        <h1>Welcome to Zen Protocol</h1>
+        <p>Loading, please wait</p>
+        {shouldDisplayLoading && <img className="loading-dots" src={LOADING_GIF_SRC} alt="Loading Gif" />}
+      </div>
     )
   }
 }
 
 export default Loading
+
+function isMobile() {
+  return (window.innerWidth <= 800) && (window.innerHeight <= 600)
+}
