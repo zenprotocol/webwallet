@@ -1,8 +1,5 @@
-import { createMemoryHistory } from 'history'
+import createBrowserHistory from 'history/createBrowserHistory'
 
-const history = createMemoryHistory({
-  initialEntries: ['/'],
-  initialIndex: 0,
-})
+const history = createBrowserHistory()
 
 export default history
