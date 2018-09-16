@@ -1,8 +1,11 @@
 import { Wallet } from '@zen/zenjs'
 
 import PollManager from '../utils/PollManager'
+import routes from "../constants/routes"
 
+import history from "./history"
 import chain, { MAINNET } from './chain'
+
 
 class _Wallet {
   // used by portfolio store to get balances, might
@@ -31,6 +34,7 @@ class _Wallet {
   instance = null
   fetch = async () => {
     if (this.instance === null) {
+      history.push(routes.LOADING)
       global.console.warn('create a wallet instance before calling fetch')
       return
     }
