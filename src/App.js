@@ -9,20 +9,24 @@ import * as stores from './stores'
 import Routes from './Routes'
 import './fontawesome'
 import './App.scss'
+import Header from "./components/Header"
 
 export default class App extends React.Component {
   render() {
     return (
-      <Provider history={history} {...stores}>
-        <ErrorBoundary FallbackComponent={ErrorScreen}>
-          <React.Fragment>
-            <Idle />
-            <div className="app-wrapper">
-              <Routes />
-            </div>
-          </React.Fragment>
-        </ErrorBoundary>
-      </Provider>
+        <React.Fragment>
+          <Header/>
+          <Provider history={history} {...stores}>
+            <ErrorBoundary FallbackComponent={ErrorScreen}>
+              <React.Fragment>
+                <Idle />
+                <div className="app-wrapper">
+                  <Routes />
+                </div>
+              </React.Fragment>
+            </ErrorBoundary>
+          </Provider>
+        </React.Fragment>
     )
   }
 }
