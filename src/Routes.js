@@ -42,6 +42,8 @@ const Routes = () => (
       <Route exact path={routes.SECRET_PHRASE_QUIZ} component={SecretPhraseQuiz} />
       <Route exact path={routes.SET_PASSWORD} component={SetPassword} />
       <Route exact path={routes.TERMS_OF_SERVICE} component={TermsOfService} />
+      { /* Error Page */}
+      <Route path="*" component={Loading}/>
     </Switch>
   </Router>
 )
