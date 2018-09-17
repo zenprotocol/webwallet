@@ -35,9 +35,71 @@ class PortfolioStore {
         if (asset === ZEN_ASSET_HASH) {
             return ZEN_ASSET_NAME
         }
-        const matchingActiveContract = this.activeContractsStore.activeContracts.find(ac => ac.contractId === asset)
+
+        const contractId = asset.substring(0, 64 + 8) // getting only the contract id, excluding the subType
+
+        const matchingActiveContract = this.activeContractsStore.activeContracts.find(ac => ac.contractId === contractId)
         if (matchingActiveContract) {
-            return getNamefromCodeComment(matchingActiveContract.code)
+            const name = getNamefromCodeComment(matchingActiveContract.code)
+
+            const subType = asset.substring(64+8)
+
+            if (subType) {
+
+                const buffer = Buffer.from(subType, 'hex')
+
+                // is a number candidate?
+                if (buffer[0] === 0) {
+                    let isNumber = true
+
+                    for (let i=5; i < 32;i++) {
+                        if (buffer[i] !== 0) {
+                            isNumber = false
+                            break
+                        }
+                    }
+
+                    if (isNumber) {
+                        const number = buffer.readInt32BE(1)
+
+                        return `${name} - #${number}`
+                    }
+                } else {
+
+                    let isZero = false
+                    let isStringCandidate = true
+                    let stringLength = 0
+
+                    // Check if buffer is padded with zeros up to the end
+                    for (let i = 0; i < 32; i++) {
+                        if (!isZero && buffer[i] === 0) {
+                            isZero = true
+                            stringLength = i
+                        }
+                        else if (isZero && buffer[i] !== 0) {
+                            isStringCandidate = false
+                            break
+                        }
+                        else if (!isZero) {
+                            stringLength = i
+                        }
+                    }
+
+                    if (isStringCandidate && stringLength > 0) {
+                        const subTypeName = buffer.slice(0, stringLength)
+
+                        if (/^[\x00-\x7F]*$/.test(subTypeName)) {
+                            return `${name} - ${subTypeName}`
+                        }
+                    }
+                }
+                
+                return ''
+                
+            } else {
+                return name
+            }
+
         }
         return ''
     }
