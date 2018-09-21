@@ -20,6 +20,7 @@ import SecretPhrase from './onBoardingPages/SecretPhrase/SecretPhrase'
 import SecretPhraseQuiz from './onBoardingPages/SecretPhraseQuiz/SecretPhraseQuiz'
 import SetPassword from './onBoardingPages/SetPassword/SetPassword'
 import TermsOfService from './onBoardingPages/TermsOfService/TermsOfService'
+import ExecuteContract from "./pages/ExecuteContract/ExecuteContract"
 
 const Routes = () => (
   <Router history={history}>
@@ -30,6 +31,7 @@ const Routes = () => (
       <Route exact path={routes.SEND_TX} component={SendTx} />
       <Route exact path={routes.TX_HISTORY} component={TxHistory} />
       <Route exact path={routes.ACTIVE_CONTRACTS} component={ActiveContracts} />
+      <Route exact path={routes.EXECUTE_CONTRACT} component={ExecuteContract} />
       <Route exact path={routes.FAUCET} component={Faucet} />
       <Route exact path={routes.LOADING} component={Loading} />
       <Route exact path={routes.UNLOCK_WALLET} component={UnlockWallet} />

@@ -45,6 +45,7 @@
   version "2.1.1"
   resolved "https://registry.yarnpkg.com/@zeit/schemas/-/schemas-2.1.1.tgz#bca9d84df177c85f2d2a7dad37512f384761b23d"
 
+<<<<<<< HEAD
 "@zen/zenjs@0.0.22":
   version "0.0.22"
   resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.22.tgz#d1f12918398c51f505440e3f42d2e24955237d7d"

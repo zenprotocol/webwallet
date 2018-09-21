@@ -1,24 +1,29 @@
 // @flow
 import React, { Component, Fragment } from 'react'
+import { Link } from 'react-router-dom'
 import { inject, observer } from 'mobx-react'
 import Flexbox from 'flexbox-react'
 import Highlight from 'react-highlight'
 import cx from 'classnames'
 
+import routes from '../../constants/routes'
 import FontAwesomeIcon from '../../vendor/@fortawesome/react-fontawesome'
 import Layout from '../../components/Layout'
 import CopyableTableCell from '../../components/CopyableTableCell'
 import ActiveContractsStore from '../../stores/activeContractsStore'
+import ExecuteContractStore from '../../stores/executeContractStore'
+
 
 type Props = {
-  activeContractsStore: ActiveContractsStore
+  activeContractsStore: ActiveContractsStore,
+  executeContractStore: ExecuteContractStore
 };
 
 type State = {
   showCodeSnippetForContractAddress: string
 };
 
-@inject('activeContractsStore')
+@inject('activeContractsStore', 'executeContractStore')
 @observer
 class ActiveContracts extends Component<Props, State> {
   state = {
@@ -60,6 +65,9 @@ class ActiveContracts extends Component<Props, State> {
               >
                 <FontAwesomeIcon icon={['far', 'code']} /> <span className="button-text">Code</span>
               </a>
+              <Link title="Run Contract" className="button small play" to={routes.EXECUTE_CONTRACT} onClick={() => this.props.executeContractStore.updateAddress(contract.address)}>
+                  <FontAwesomeIcon icon={['far', 'play']} /> <span className="button-text">Run</span>
+              </Link>
             </td>
           </tr>
           <tr className={cx('code', { 'display-none': !isCodeCurrentyViewed })}>
