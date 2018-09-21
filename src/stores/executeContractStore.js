@@ -23,7 +23,6 @@ class ExecuteContractStore {
         this.inProgress = true
         const payloadData = { ...this.payloadData, password }
         const { address, command, messageBody, options, spends } = payloadData
-        console.log(payloadData)
         try {
             await wallet.instance.executeContract(address, command, messageBody, options.returnAddress, spends)
             runInAction(() => {
