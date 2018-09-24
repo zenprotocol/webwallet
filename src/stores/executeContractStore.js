@@ -1,8 +1,10 @@
 import { observable, action, runInAction, computed } from 'mobx'
-import { fromYaml, serialize } from '@zen/zenjs/build/src/Data'
+import Data, { fromYaml} from '@zen/zenjs/build/src/Data'
 
 import wallet from '../services/wallet'
 import { zenToKalapas, isZenAsset } from '../utils/zenUtils'
+import chain, {MAINNET} from "../services/chain"
+
 
 class ExecuteContractStore {
     @observable address = ''
@@ -76,12 +78,16 @@ class ExecuteContractStore {
             return ''
         }
         try {
-            fromYaml('main', this.messageBody)
+            fromYaml(this.currentChain, this.messageBody)
             return ''
         } catch (err) {
             console.error('error parsing message body', err)
             return 'Body must be valid yaml syntax'
         }
+    }
+
+    get currentChain() {
+        return chain.current === MAINNET ? 'main' : 'test'
     }
 
     @action
@@ -117,7 +123,9 @@ class ExecuteContractStore {
             data.command = this.command
         }
         if (this.messageBody) {
-            data.messageBody = serialize(fromYaml('main', this.messageBody))
+            data.messageBody = fromYaml(this.currentChain, this.messageBody)
+        } else {
+            data.messageBody = new Data.Dictionary([])
         }
         return data
     }
