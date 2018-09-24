@@ -14,7 +14,7 @@ class PublicAddressStore {
         await wallet.fetch()
         runInAction(() => {
           this.address = wallet.instance.getAddress()
-          this.pkHash = wallet.instance.getPublicKeyHash()
+          this.pkHash = wallet.instance.getPublicKeyHash().hash
           this.addressError = ''
         })
       } catch (err) {
