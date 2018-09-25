@@ -25,7 +25,6 @@ type Contract = {
 type Props = {
   initialSuggestionInputValue: ?string,
   activeContracts: Array<Contract>,
-  savedContracts: Array<Contract>,
   onUpdateParent: () => {}
 };
 
@@ -85,13 +84,8 @@ class AutoSuggestActiveContracts extends Component<Props> {
 
   getError() {
     const { suggestions, suggestionInputValue } = this.state
-    const { savedContracts } = this.props
     if (this.isValid() || (suggestions.length > 0) || (suggestionInputValue.length === 0)) {
       return false
-    }
-    const matchingSavedContract = savedContracts.find(sc => sc.address === suggestionInputValue)
-    if (matchingSavedContract) {
-      return 'Contract is not active'
     }
     return 'Contract address doesn\'t exist'
   }
@@ -100,7 +94,7 @@ class AutoSuggestActiveContracts extends Component<Props> {
     return !!this.getChosenContract(query)
   }
 
-  onPaste = (clipboardContents) => {
+  onPaste = (clipboardContents : string) => {
     if (!clipboardContents) {
       return
     }
