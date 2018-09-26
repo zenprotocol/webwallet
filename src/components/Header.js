@@ -10,10 +10,19 @@ type State = {
     isVisible?: boolean
 };
 
+const LS_VISIBLE = 'barVisibility'
+
 @observer
 class Header extends Component<State> {
     state = {
-        isVisible: true,
+        isVisible: this.isVisible,
+    }
+
+    isVisible(){
+        if(localStorage.getItem(LS_VISIBLE)){
+            return localStorage.getItem(LS_VISIBLE)
+        }
+        return true
     }
 
     shouldSwitchModal() {
@@ -21,7 +30,7 @@ class Header extends Component<State> {
             title: 'Did you bookmark this page?',
             icon: 'warning',
             dangerMode: true,
-            buttons: true,
+            buttons: ["No", "Yes"],
         })
     }
 
@@ -31,6 +40,7 @@ class Header extends Component<State> {
             return
         }
         this.setState({isVisible: false})
+        localStorage.setItem(LS_VISIBLE, this.state.isVisible)
     }
 
     style() {
@@ -39,18 +49,20 @@ class Header extends Component<State> {
             top: 0,
             width: '100%',
             height: 30,
-            background: '#3a88d9',
+            background: '#d92100',
             color: 'white',
             paddingTop: 6,
             paddingBottom: 6,
             textAlign: 'center',
         }
     }
+
+
     render() {
         return (
             this.state.isVisible && <div style={this.style()}>
-                <p>DON'T GET PHISHED, please!</p>
-                <p>1. BOOKMARK HTTPS://WALLET.ZP.IO</p>
+                <p>Beware of <a href="https://en.wikipedia.org/wiki/Phishing" style={{ color: 'white' }} target="_blank"  rel="noopener noreferrer">PISHING</a> Sites</p>
+                <p>Please bookmark this site and make sure you are visiting the correct domain when using the wallet</p>
                 <a onClick={this.onClick}>
                     <FontAwesomeIcon style={{  color: '#fff', position: 'fixed', top: '1em', right: '1em' }} icon={['fal', 'times']} />
                 </a>
