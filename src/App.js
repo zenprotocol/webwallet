@@ -15,12 +15,12 @@ export default class App extends React.Component {
   render() {
     return (
         <React.Fragment>
-          <Header/>
           <Provider history={history} {...stores}>
             <ErrorBoundary FallbackComponent={ErrorScreen}>
               <React.Fragment>
                 <Idle />
                 <div className="app-wrapper">
+                  <Header/>
                   <Routes />
                 </div>
               </React.Fragment>
