@@ -9,7 +9,7 @@ export const isDev = () => process.env.NODE_ENV === 'development'
 export const truncateString = (string: ?string) => {
   if (string) {
     return string.length > 12
-      ? `${string.substr(0, 6)}...${string.substr(string.length - 6)}`
+      ? `${string.substr(8,6)}...${string.substr(string.length - 6)}`
       : string
   }
 }
