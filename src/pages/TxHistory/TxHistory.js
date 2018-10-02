@@ -43,7 +43,7 @@ class TxHistory extends Component<Props> {
   renderLoadingTransactions() {
     return (
       <tr className="loading-transactions">
-        <td colSpan={5}>
+        <td colSpan={7}>
           <Flexbox>
             <Flexbox flexGrow={1} >Loading transactions ...</Flexbox>
             <FontAwesomeIcon icon={['far', 'spinner-third']} spin />
