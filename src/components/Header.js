@@ -59,7 +59,7 @@ class Header extends Component<Props,State> {
     render() {
         return (
             this.state.isVisible && <div style={this.style()}>
-                <p>Beware of <a href="https://en.wikipedia.org/wiki/Phishing" style={{ color: 'white' }} target="_blank"  rel="noopener noreferrer">PISHING</a> Sites</p>
+                <p>Beware of <a href="https://en.wikipedia.org/wiki/Phishing" style={{ color: 'white' }} target="_blank"  rel="noopener noreferrer">PHISHING</a> Sites</p>
                 <p>Please bookmark this site and make sure you are visiting the correct domain when using the wallet</p>
                 <a onClick={this.onClick}>
                     <FontAwesomeIcon style={{  color: '#fff', position: 'fixed', top: '1em', right: '1em' }} icon={['fal', 'times']} />
