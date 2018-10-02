@@ -22,7 +22,7 @@ class NetBottomBar extends Component<Props> {
     console.log('networkStore.chain', networkStore.chain)
     return networkStore.chain === MAINNET ? this.renderMainnetBar() : this.renderTestnetBar()
   }
-  
+
   renderMainnetBar() {
     if (this.props.isSidebar) {
       return null
@@ -33,7 +33,7 @@ class NetBottomBar extends Component<Props> {
       </div>
     )
   }
-  
+
   renderTestnetBar() {
     return (
       <div style={this.style}>
@@ -50,7 +50,7 @@ class NetBottomBar extends Component<Props> {
       left: 0,
       bottom: 0,
       width: width || '100%',
-      background: chain === MAINNET ? 'rgba(18, 18, 18, 0.1)' : '#fd3a3a',
+      background: chain === MAINNET ? 'rgba(18, 18, 18, 0.1)' : '#f68b3d',
       textAlign: 'center',
       color: 'white',
       fontWeight: chain === MAINNET ? 'inherit' : 'bold',
