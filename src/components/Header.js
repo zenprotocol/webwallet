@@ -13,16 +13,13 @@ type State = {
 const LS_VISIBLE = 'barVisibility'
 
 @observer
-class Header extends Component<State> {
+class Header extends Component<Props,State> {
     state = {
-        isVisible: this.isVisible,
+        isVisible: this.lsVisibleExists()
     }
 
-    isVisible(){
-        if(localStorage.getItem(LS_VISIBLE)){
-            return localStorage.getItem(LS_VISIBLE)
-        }
-        return true
+    lsVisibleExists(){
+        return !!localStorage.getItem(LS_VISIBLE)
     }
 
     shouldSwitchModal() {
@@ -30,7 +27,7 @@ class Header extends Component<State> {
             title: 'Did you bookmark this page?',
             icon: 'warning',
             dangerMode: true,
-            buttons: ["No", "Yes"],
+            button: true
         })
     }
 
@@ -49,11 +46,12 @@ class Header extends Component<State> {
             top: 0,
             width: '100%',
             height: 30,
-            background: '#d92100',
+            background: '#f63d3d',
             color: 'white',
             paddingTop: 6,
             paddingBottom: 6,
             textAlign: 'center',
+
         }
     }
 
