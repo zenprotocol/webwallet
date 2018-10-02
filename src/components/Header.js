@@ -15,7 +15,7 @@ const LS_VISIBLE = 'barVisibility'
 @observer
 class Header extends Component<Props,State> {
     state = {
-        isVisible: this.lsVisibleExists()
+        isVisible: !this.lsVisibleExists()
     }
 
     lsVisibleExists(){
