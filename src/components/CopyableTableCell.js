@@ -2,19 +2,25 @@
 
 import React from 'react'
 import clipboard from "clipboard-polyfill"
+import {inject} from "mobx-react"
 
 import FontAwesomeIcon from '../vendor/@fortawesome/react-fontawesome'
 import { truncateString } from '../utils/helpers'
 import { isZenAsset } from '../utils/zenUtils'
+import NetworkStore from '../stores/networkStore'
+import {MAINNET} from "../services/chain"
+
 
 type Props = {
-  string: string,
-  istx?: boolean
+    networkStore: NetworkStore,
+    string: string,
+    istx?: boolean
 };
 
 type State = {
-  copyText: string
+    copyText: string
 };
+@inject('networkStore')
 class CopyableTableCell extends React.Component<Props, State> {
   copyTimeout: TimeoutID
   state = {
@@ -35,11 +41,15 @@ class CopyableTableCell extends React.Component<Props, State> {
     const { string } = this.props
     return !isZenAsset(string) ? truncateString(string) : string
   }
+  get getLink() {
+    const { networkStore } = this.props
+      return networkStore.chain === MAINNET ? '' : 'testnet.'
+  }
   renderString() {
     const { string, istx } = this.props
     return istx ? (
       <a target='_blank' rel='noreferrer noopener'
-        href={`https://zp.io/tx/${string}`}>
+        href={`https://${this.getLink}zp.io/tx/${string}`}>
         {this.formattedString}
       </a>
     ) : this.formattedString

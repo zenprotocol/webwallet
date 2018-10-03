@@ -8,6 +8,7 @@ import { normalizeTokens, isZenAsset } from '../../utils/zenUtils'
 import CopyableTableCell from '../../components/CopyableTableCell'
 import NetworkStore from '../../stores/networkStore'
 import PortfolioStore from "../../stores/portfolioStore"
+import {MAINNET} from "../../services/chain"
 
 
 type Props = {
@@ -35,6 +36,11 @@ class SingleTxDelta extends React.Component<Props> {
     const { networkStore, tx } = this.props
     return (networkStore.headers - tx.confirmations) + 1
   }
+  get getLink() {
+      const { networkStore } = this.props
+      return networkStore.chain === MAINNET ? '' : 'testnet.'
+  }
+
   render() {
     const { asset, amount, confirmations } = this.props.tx
     return (
@@ -42,8 +48,8 @@ class SingleTxDelta extends React.Component<Props> {
         <CopyableTableCell string={asset} />
         <td>{this.assetName}</td>
         <td>
-          <a target='_blank' rel='noreferrer noopener' 
-            href={`https://zp.io/blocks/${this.blockNumber}`}>
+          <a target='_blank' rel='noreferrer noopener'
+            href={`https://${this.getLink}zp.io/blocks/${this.blockNumber}`}>
             {this.blockNumber}
           </a>
         </td>
