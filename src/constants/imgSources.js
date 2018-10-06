@@ -1,4 +1,4 @@
-import _LOGO_SRC from '../assets/img/zen-logo.png'
+import _LOGO_SRC from '../assets/img/zen_beta_logo.png'
 import _CREATE_WALLET_SRC from '../assets/img/create-wallet-icon.png'
 import _IMPORT_WALLET_SRC from '../assets/img/import-wallet-icon.png'
 import _CANCEL_ICON_SRC from '../assets/img/cancel-icon.png'
