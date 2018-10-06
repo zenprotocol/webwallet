@@ -33,7 +33,7 @@ class OnBoardingLayout extends React.Component<Props> {
     return (
       <Flexbox flexDirection="column" className={cx('onboarding-container', className)}>
         <Flexbox flexDirection="row" className="onboarding-header">
-          <Flexbox className="zen-logo" width="100px">
+          <Flexbox className="zen-logo" width="120px">
             <Link to={routes.HOME}>
               <img src={LOGO_SRC} alt="Zen Protocol Logo" />
             </Link>
