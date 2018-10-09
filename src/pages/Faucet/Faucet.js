@@ -12,7 +12,6 @@ import routes from '../../constants/routes'
 import { ref } from '../../utils/domUtils'
 import { MAINNET } from '../../services/chain'
 import Layout from '../../components/Layout'
-import PasteButton from '../../components/PasteButton'
 import FormResponseMessage from '../../components/FormResponseMessage'
 import RedeemTokensStore from '../../stores/redeemTokensStore'
 import PublicAddressStore from '../../stores/publicAddressStore'
@@ -249,11 +248,11 @@ class Faucet extends Component<Props> {
                   {this.renderCheckingEntitlementMessage()}
                   {this.renderValidPubkeyMessage()}
                 </Flexbox>
-
+                  {/*
                 <PasteButton
                   className="button-on-right"
                   onClick={this.onPasteClicked}
-                />
+                />*/}
               </Flexbox>
             </Flexbox>
             <Flexbox>
