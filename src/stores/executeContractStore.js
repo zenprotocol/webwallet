@@ -18,6 +18,7 @@ class ExecuteContractStore {
 
     constructor(activeContractsStore) {
         this.activeContractsStore = activeContractsStore
+        wallet.fetch()
     }
 
     @action

@@ -40,6 +40,7 @@ class TxHistoryStore {
     if (this.isFetching) { return }
     this.isFetching = true
     try {
+      await wallet.fetch()
       const result = await wallet.instance.getTransactions()
       runInAction(() => {
         if (result.length) {
