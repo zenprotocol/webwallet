@@ -18,7 +18,7 @@ import ProtectedButton from '../../components/ProtectedButton'
 import AutoSuggestAssets from '../../components/AutoSuggestAssets'
 import FormResponseMessage from '../../components/FormResponseMessage'
 import AmountInput from '../../components/AmountInput'
-import PasteButton from '../../components/PasteButton'
+// import PasteButton from '../../components/PasteButton'
 
 type Props = {
   sendTxStore: SendTxStore,
@@ -158,10 +158,10 @@ class SendTx extends Component<Props> {
                   />
                   {this.renderAddressErrorMessage()}
                 </Flexbox>
-                <PasteButton
+                  {/* <PasteButton
                   className="button-on-right"
                   onClick={this.onPasteClicked}
-                />
+                /> */}
               </Flexbox>
             </Flexbox>
             <Flexbox flexDirection="row">

@@ -5,7 +5,7 @@ import cx from 'classnames'
 
 import FontAwesomeIcon from '../../vendor/@fortawesome/react-fontawesome'
 import { truncateString } from '../../utils/helpers'
-import PasteButton from '../PasteButton'
+// import PasteButton from '../PasteButton'
 
 const getSuggestionValue = suggestion => suggestion.address
 const renderSuggestion = suggestion => (
@@ -166,7 +166,7 @@ class AutoSuggestActiveContracts extends Component<Props> {
             {this.renderChosenContractName()}
             {this.renderErrorMessage()}
           </Flexbox>
-          <PasteButton className="button-on-right" onClick={this.onPaste} />
+            {/*<PasteButton className="button-on-right" onClick={this.onPaste} />*/}
         </Flexbox>
       </Flexbox>
     )

@@ -6,12 +6,12 @@ import { Link } from 'react-router-dom'
 import Flexbox from 'flexbox-react'
 import bip39 from 'bip39'
 import _ from 'lodash'
-import swal from 'sweetalert'
+// import swal from 'sweetalert'
 
-import { isValidBip39Word, isBip39Word, getSeedFromClipboard } from '../../utils/seedUtils'
+import { isValidBip39Word, isBip39Word, setWordFromFirstBox } from '../../utils/seedUtils'
 import routes from '../../constants/routes'
 import SecretPhraseStore from '../../stores/secretPhraseStore'
-import PasteButton from '../../components/PasteButton'
+// import PasteButton from '../../components/PasteButton'
 import ResetButton from '../../components/ResetButton'
 import SeedInput from '../../components/SeedInput'
 import OnBoardingLayout from '../Layout/Layout'
@@ -35,7 +35,13 @@ class ImportWallet extends Component<Props, State> {
   registerOnChangeFor = (idx: number) => (evt: SyntheticEvent<HTMLInputElement>) => {
     const { value } = evt.currentTarget // persist evt, don't delete! see https://reactjs.org/docs/events.html#event-pooling
     this.setState(({ userInputWords }) => {
-      userInputWords[idx] = value
+      const words = setWordFromFirstBox(value, idx)
+      if(words){
+        userInputWords = words
+      }
+      else {
+          userInputWords[idx] = value
+      }
       return { userInputWords }
     })
   }
@@ -72,18 +78,18 @@ class ImportWallet extends Component<Props, State> {
   reset = () => {
     this.setState({ userInputWords: getInitialInputsState() })
   }
-  paste = (clipboardContents: string) => {
-    const arraySeed = getSeedFromClipboard(clipboardContents)
-    if (!arraySeed) {
-      swal({
-        icon: 'warning',
-        title: 'bad format',
-        text: 'your clipboard content is not formatted as a valid seed',
-      })
-      return
-    }
-    this.setState({ userInputWords: arraySeed })
-  }
+  // paste = (clipboardContents: string) => {
+  //   const arraySeed = getSeedFromClipboard(clipboardContents)
+  //   if (!arraySeed) {
+  //     swal({
+  //       icon: 'warning',
+  //       title: 'bad format',
+  //       text: 'your clipboard content is not formatted as a valid seed',
+  //     })
+  //     return
+  //   }
+  //   this.setState({ userInputWords: arraySeed })
+  // }
   onSubmitClicked = () => {
     const { secretPhraseStore } = this.props
     secretPhraseStore.setMnemonicToImport(this.state.userInputWords)
@@ -111,7 +117,7 @@ class ImportWallet extends Component<Props, State> {
         <h3>
           Please enter your 24 word secret phrase (seed).
           <br />
-          A blue check will apear if the text you entered is a valid&nbsp;
+          A blue check will appear if the text you entered is a valid&nbsp;
           <a target='_blank' rel='noreferrer noopener'
             href="https://github.com/bitcoin/bips/blob/master/bip-0039/english.txt">
             bip39 word
@@ -125,7 +131,7 @@ class ImportWallet extends Component<Props, State> {
         </ol>
 
         <div>
-          <PasteButton onClick={this.paste} />
+            {/*<PasteButton onClick={this.paste} />*/}
           <ResetButton onClick={this.reset} className="button-on-right" />
         </div>
         {this.notValidBip39PhraseMessage}
