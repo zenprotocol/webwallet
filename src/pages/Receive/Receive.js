@@ -9,6 +9,7 @@ import Layout from '../../components/Layout'
 import Copy from '../../components/Copy'
 import Toggle from '../../components/Toggle'
 
+
 type Props = {
   publicAddressStore: PublicAddressStore
 };
@@ -32,7 +33,14 @@ class Receive extends Component<Props> {
             <Copy valueToCopy={publicAddressStore.address}>
               <Copy.Label>Your Address</Copy.Label>
               <Flexbox flexDirection="row" className="address-input form-row">
-                <Copy.Input className="full-width" />
+                  <input
+                      id="from"
+                      type="text"
+                      readOnly
+                      value={publicAddressStore.address}
+                      style={{ cursor: 'pointer' }}
+                      className="full-width"
+                  />
                 <Copy.Button className="button-on-right" />
               </Flexbox>
               {publicAddressStore.addressError && (
@@ -56,7 +64,14 @@ class Receive extends Component<Props> {
                       <Copy.Label>PKHash</Copy.Label>
                     </div>
                     <Flexbox flexDirection="row" className="address-input form-row">
-                      <Copy.Input className="full-width" />
+                        <input
+                            id="PKHash"
+                            type="text"
+                            readOnly
+                            value={publicAddressStore.pkHash}
+                            style={{ cursor: 'pointer' }}
+                            className="full-width"
+                        />
                       <Copy.Button className="button-on-right" />
                     </Flexbox>
                     {publicAddressStore.pkHashError && (
