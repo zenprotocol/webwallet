@@ -12,6 +12,7 @@ import OnBoardingLayout from '../Layout/Layout'
 import SecretPhraseStore from '../../stores/secretPhraseStore'
 import routes from '../../constants/routes'
 import { ref } from '../../utils/domUtils'
+import {setWordFromFirstBox} from "../../utils/seedUtils"
 
 const getInitialInputsState = () => _.range(24).map(() => '')
 
@@ -42,13 +43,19 @@ class SecretPhraseQuiz extends Component<Props, State> {
   registerOnChangeFor = (idx: number) => (evt: SyntheticEvent<HTMLInputElement>) => {
     const { value } = evt.currentTarget // persist evt, don't delete! see https://reactjs.org/docs/events.html#event-pooling
     this.setState(({ userInputWords }) => {
-      userInputWords[idx] = value
-      return { userInputWords }
+        const words = setWordFromFirstBox(value, idx)
+        if(words){
+            userInputWords = words
+        }
+        else {
+            userInputWords[idx] = value
+        }
+        return { userInputWords }
     }, () => {
-      if (this.isInputPerfect(idx) && idx < 23) {
-        // $FlowFixMe
-        this[`input${idx + 1}`].focus()
-      }
+        if (this.isInputPerfect(idx) && idx < 23) {
+            // $FlowFixMe
+            this[`input${idx + 1}`].focus()
+        }
     })
   }
 
