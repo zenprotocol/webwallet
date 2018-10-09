@@ -53,7 +53,7 @@ class Receive extends Component<Props> {
                 <Toggle.On>
                   <Copy valueToCopy={publicAddressStore.pkHash}>
                     <div>
-                      <Copy.Label>PkHash</Copy.Label>
+                      <Copy.Label>PKHash</Copy.Label>
                     </div>
                     <Flexbox flexDirection="row" className="address-input form-row">
                       <Copy.Input className="full-width" />
