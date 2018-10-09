@@ -79,6 +79,7 @@
     "whatwg-fetch": "2.0.3"
   },
   "scripts": {
+    "release": "scripts/release.sh",
     "build": "node scripts/build.js",
     "heroku-postbuild": "yarn build",
     "lint": "node node_modules/eslint/bin/eslint.js --ignore-pattern vendor/ --config node_modules/eslint-config-react-app/index.js src",
