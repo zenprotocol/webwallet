@@ -103,9 +103,9 @@ class Settings extends Component<Props> {
       return (
           <Flexbox className="row">
               <Flexbox flexDirection="column" className="description">
-                  <h2 className="description-title">Wipe your storage</h2>
+                  <h2 className="description-title">Wipe Storage</h2>
                   <p>
-                      Wipe your storage if want to create or import a new wallet
+                      Wipe your storage if you want to create or import a new wallet
                   </p>
               </Flexbox>
               <Flexbox flexDirection="column" className="actions">
