@@ -36,11 +36,11 @@ class Loading extends Component {
       </Flexbox>
     )
   }
-  
+
   get renderMobileMsg() {
     return <p>Zen web wallet is not supported on mobile. <br />Please use a laptop or desktop computer</p>
   }
-  
+
   get renderLoadingMsg() {
     const { shouldDisplayLoading } = this.state
     return (
@@ -56,5 +56,7 @@ class Loading extends Component {
 export default Loading
 
 function isMobile() {
-  return (window.innerWidth <= 800) && (window.innerHeight <= 600)
+    return (window.innerWidth <= 900 || document.documentElement.clientWidth <= 900
+        || document.body.clientWidth  <= 900) && (window.innerHeight <= 600|| document.documentElement.clientHeight <= 600
+        || document.body.clientHeight  <= 600)
 }
