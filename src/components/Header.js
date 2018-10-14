@@ -3,6 +3,7 @@
 import React, { Component } from 'react'
 import { observer } from 'mobx-react'
 import swal from "sweetalert"
+import {isMobileOnly} from 'react-device-detect'
 
 import FontAwesomeIcon from "../vendor/@fortawesome/react-fontawesome"
 
@@ -15,7 +16,7 @@ const LS_VISIBLE = 'barVisibility'
 @observer
 class Header extends Component<Props,State> {
     state = {
-        isVisible: !this.lsVisibleExists()
+        isVisible: isMobileOnly ? false : !this.lsVisibleExists()
     }
 
     lsVisibleExists(){

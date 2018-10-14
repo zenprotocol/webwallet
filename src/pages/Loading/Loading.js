@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import Flexbox from 'flexbox-react'
+import {isMobileOnly} from 'react-device-detect'
 
 import { LOADING_GIF_SRC, LOGO_GIF_SRC } from '../../constants/imgSources'
 
@@ -13,9 +14,10 @@ class Loading extends Component {
   }
 
   componentDidMount() {
-    if (isMobile()) {
+    if (isMobileOnly) {
       return
     }
+
     load()
     this.timeout = setTimeout(() => {
       this.setState({ shouldDisplayLoading: true })
@@ -31,16 +33,16 @@ class Loading extends Component {
       <Flexbox flexDirection="column" className="loading-container">
         <Flexbox flexDirection="column" className="center">
           <img className="zen-logo" src={LOGO_GIF_SRC} alt="Zen Protocol Logo" />
-          {isMobile() ? this.renderMobileMsg : this.renderLoadingMsg}
+          {isMobileOnly ? this.renderMobileMsg : this.renderLoadingMsg}
         </Flexbox>
       </Flexbox>
     )
   }
-  
+
   get renderMobileMsg() {
     return <p>Zen web wallet is not supported on mobile. <br />Please use a laptop or desktop computer</p>
   }
-  
+
   get renderLoadingMsg() {
     const { shouldDisplayLoading } = this.state
     return (
@@ -55,6 +57,3 @@ class Loading extends Component {
 
 export default Loading
 
-function isMobile() {
-  return (window.innerWidth <= 800) && (window.innerHeight <= 600)
-}
