@@ -10,6 +10,7 @@ import Routes from './Routes'
 import './fontawesome'
 import './App.scss'
 import Header from "./components/Header"
+import Updater from "./components/Updater/Updater"
 
 export default class App extends React.Component {
   render() {
@@ -18,6 +19,7 @@ export default class App extends React.Component {
           <Provider history={history} {...stores}>
             <ErrorBoundary FallbackComponent={ErrorScreen}>
               <React.Fragment>
+                <Updater />
                 <Idle />
                 <div className="app-wrapper">
                   <Header/>

@@ -32,7 +32,10 @@ class UpdateModal extends React.Component<Props> {
     swal.close()
   }
 
-  onDownload = () => swal.close()
+  onDownload = () => {
+      window.location.reload(true)
+      swal.close()
+  }
 
   render() {
     const { message } = this.props
@@ -45,8 +48,7 @@ class UpdateModal extends React.Component<Props> {
           <div style={{ marginBottom: 25 }} dangerouslySetInnerHTML={msgHTML} />
         </div>
         <button className="secondary" onClick={this.onDismiss}>Close</button>
-        <button className="button-on-right" onClick={this.onDownload}>
-        </button>
+        <button className="button-on-right" onClick={this.onDownload}>Reload and clean cache</button>
       </div>
     )
   }

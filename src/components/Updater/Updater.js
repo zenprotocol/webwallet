@@ -5,7 +5,7 @@ import { checkForUpdates } from './Update'
 import updateModal from './UpdateModal'
 
 const POLL_INTERVAL = 1000 * 5 * 60
-const pollForUpdates = async () => {
+export const pollForUpdates = async () => {
   const updateContent = await checkForUpdates()
   if (!updateContent) {
     setTimeout(pollForUpdates, POLL_INTERVAL)

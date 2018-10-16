@@ -9,11 +9,14 @@ import NetworkStore from '../../stores/networkStore'
 import Layout from '../../components/Layout'
 import { MAINNET } from '../../services/chain'
 import switchChain from '../../utils/switchChainModal'
+import {pollForUpdates} from "../../components/Updater/Updater"
 
 import wipeLocalStorage from './wipeLocalStorageUtil'
 import showSeed from './showSeedUtil'
 import logout from './logoutUtil'
 import './Settings.scss'
+
+
 
 type Props = {
   secretPhraseStore: SecretPhraseStore,
@@ -99,6 +102,21 @@ class Settings extends Component<Props> {
       </Flexbox>
     )
   }
+  renderShowReleaseNote(){
+      return (
+          <Flexbox className="row">
+              <Flexbox flexDirection="column" className="description">
+                  <h2 className="description-title">Release Notes</h2>
+                  <p>
+                      Check the latest update notes
+                  </p>
+              </Flexbox>
+              <Flexbox flexDirection="column" className="actions">
+                  <button className="btn-block" onClick={() => pollForUpdates().then()}>Show</button>
+              </Flexbox>
+          </Flexbox>
+      )
+  }
   renderWipe() {
       return (
           <Flexbox className="row">
@@ -109,7 +127,7 @@ class Settings extends Component<Props> {
                   </p>
               </Flexbox>
               <Flexbox flexDirection="column" className="actions">
-                  <button className="secondary" onClick={wipeLocalStorage}>Wipe your storage</button>
+                  <button className="secondary" onClick={wipeLocalStorage}>Wipe storage</button>
               </Flexbox>
           </Flexbox>
       )
@@ -123,6 +141,7 @@ class Settings extends Component<Props> {
         {this.renderAutoLogout()}
         {this.renderChain()}
         {this.renderShowSeed()}
+        {this.renderShowReleaseNote()}
         {this.renderLogout()}
         {this.renderWipe()}
       </Layout>
