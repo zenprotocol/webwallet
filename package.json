@@ -69,7 +69,6 @@
     "react-switch": "^3.0.4",
     "sass-loader": "^6.0.6",
     "semver-compare": "^1.0.0",
-    "serve": "^10.0.0",
     "style-loader": "0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
@@ -89,13 +88,15 @@
     "lint": "node node_modules/eslint/bin/eslint.js --ignore-pattern vendor/ --config node_modules/eslint-config-react-app/index.js src",
     "start": "node scripts/start.js",
     "start:prod": "serve -s build",
+    "start:dapp-embedding-example": "serve -s dapp-with-embedded-iframe-example",
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
     "eslint-plugin-flowtype": "^2.50.0",
     "eslint-plugin-import": "^2.13.0",
     "husky": "^1.0.0-rc.13",
-    "lint-staged": "^7.2.0"
+    "lint-staged": "^7.2.0",
+    "serve": "^10.1.1"
   },
   "lint-staged": {
     "linters": {

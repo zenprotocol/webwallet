@@ -1,9 +1,9 @@
 import { Wallet } from '@zen/zenjs'
 
 import PollManager from '../utils/PollManager'
-import routes from "../constants/routes"
+// import routes from "../constants/routes"
 
-import history from "./history"
+// import history from "./history"
 import chain, { MAINNET } from './chain'
 
 
@@ -34,7 +34,9 @@ class _Wallet {
   instance = null
   fetch = async () => {
     if (this.instance === null) {
-      history.push(routes.LOADING)
+      // Don't know why we are redirecting to loading here
+      // removed it in order to allow embedding the web wallet as iframe
+      // history.push(routes.LOADING)
       global.console.warn('create a wallet instance before calling fetch')
       return
     }

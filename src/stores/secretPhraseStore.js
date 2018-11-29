@@ -77,6 +77,11 @@ class secretPhraseStore {
     }
   }
 
+  @action async unlockWalletInIframe(password) {
+    const decryptedMnemonicPhraseAsString = this.decryptMnemonicPhrase(password)
+    wallet.create(decryptedMnemonicPhraseAsString)
+  }
+
   isPasswordCorrect(password) {
      return !!this.decryptMnemonicPhrase(password)
   }

@@ -21,6 +21,7 @@ import SecretPhraseQuiz from './onBoardingPages/SecretPhraseQuiz/SecretPhraseQui
 import SetPassword from './onBoardingPages/SetPassword/SetPassword'
 import TermsOfService from './onBoardingPages/TermsOfService/TermsOfService'
 import ExecuteContract from "./pages/ExecuteContract/ExecuteContract"
+import EmbeddedSendTransaction from "./pages/EmbeddedSendTransaction/EmbeddedSendTransaction"
 
 const Routes = () => (
   <Router history={history}>
@@ -44,8 +45,9 @@ const Routes = () => (
       <Route exact path={routes.SECRET_PHRASE_QUIZ} component={SecretPhraseQuiz} />
       <Route exact path={routes.SET_PASSWORD} component={SetPassword} />
       <Route exact path={routes.TERMS_OF_SERVICE} component={TermsOfService} />
+      { /* Embedded Routes */}
+      <Route exact path={routes.EMBEDDED_SEND_TRANSACTION} component={EmbeddedSendTransaction} />
       { /* Error Page */}
-      <Route path="*" component={Loading}/>
     </Switch>
   </Router>
 )

@@ -1,0 +1,54 @@
+<html>
+  <head>
+    <title>Embedding web wallet example</title>
+    <style>
+      .iframe-container {
+        max-width: 600px;
+        margin: 40px auto;
+      }
+
+      iframe {
+        width: 100%;
+        height: 100%;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>Embedding web wallet example</h1>
+    <div>
+      <button
+        onclick="messageTool(JSON.stringify({ someOption: 'some value' }))"
+      >
+        Send message to Zen Wallet
+      </button>
+    </div>
+    <div class="iframe-container">
+      <iframe id="iframe" frameborder="0"></iframe>
+    </div>
+  </body>
+  <script>
+    const iframeEl = document.getElementById("iframe");
+    iframeEl.src = getIframeSource();
+    window.addEventListener("message", this.onMessage.bind(this));
+
+    function messageTool(msg) {
+      iframeEl.contentWindow.postMessage(msg, "*");
+    }
+
+    function onMessage(evt) {
+      console.log("[MESSAGE FROM WEB WALLET]", evt.data, evt);
+    }
+
+    function getIframeSource() {
+      const baseUrl = isProd()
+        ? "prod-address-url-here.com"
+        : "http://localhost:3000";
+      return baseUrl + '/embedded-send-transaction';
+    }
+
+    function isProd() {
+      return false
+    }
+  </script>
+</html>

@@ -62,11 +62,18 @@ class SendTxStore {
   resetForm() {
     this.inProgress = false
     this.asset = ''
-    this.assetName = ''
+    this.assetName = '' // [AdGo] 28/11/2018 - I think we can delete this, not used anywhere
     this.to = ''
     this.amountDisplay = ''
     this.status = ''
     this.errorMessage = ''
+  }
+
+  @action
+  fillParamsFromIframe({ to, asset, amountDisplay }) {
+    this.to = to
+    this.asset = asset
+    this.amountDisplay = amountDisplay
   }
 
   get amount() {

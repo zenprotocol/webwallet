@@ -19,4 +19,6 @@ export default {
   SET_PASSWORD: '/set-password',
   TERMS_OF_SERVICE: '/terms-of-service',
   ERROR_REPORTING_OPT_IN: '/error-reporting-opt-in',
+  // Embedded routes
+  EMBEDDED_SEND_TRANSACTION: '/embedded-send-transaction'
 }
