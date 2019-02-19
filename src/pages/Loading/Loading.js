@@ -1,24 +1,43 @@
 import React, { Component } from 'react'
 import Flexbox from 'flexbox-react'
 import {isMobileOnly} from 'react-device-detect'
+import TransportU2F from "@ledgerhq/hw-transport-u2f"
+
 
 import { LOADING_GIF_SRC, LOGO_GIF_SRC } from '../../constants/imgSources'
 
-import load from './loadUtil'
+//import load from './loadUtil'
 
 const TIME_TO_DISPLAY_LOADING = 3650
 
 class Loading extends Component {
   state = {
     shouldDisplayLoading: false,
+    isSupported: false,
+    descriptors: []
   }
 
-  componentDidMount() {
+  async componentDidMount() {
     if (isMobileOnly) {
       return
     }
+    const isSupported = await TransportU2F.isSupported()
 
-    load()
+    this.setState({
+      isSupported
+    })
+
+    if (isSupported) {
+      const transport = await TransportU2F.create()
+      console.log(transport)
+      const descriptors = await TransportU2F.list()
+      console.log(descriptors)
+
+      this.setState({
+        descriptors
+      })
+    }
+    //load()
     this.timeout = setTimeout(() => {
       this.setState({ shouldDisplayLoading: true })
     }, TIME_TO_DISPLAY_LOADING)
@@ -47,6 +66,12 @@ class Loading extends Component {
     const { shouldDisplayLoading } = this.state
     return (
       <div>
+        <div className="App">
+          <p>{this.state.isSupported ? `yes` : `no`}</p>
+          {this.state.isSupported && (
+              <p>Descriptors: {this.state.descriptors.length}</p>
+          )}
+        </div>
         <h1>Welcome to Zen Protocol</h1>
         <p>Loading, please wait</p>
         {shouldDisplayLoading && <img className="loading-dots" src={LOADING_GIF_SRC} alt="Loading Gif" />}
