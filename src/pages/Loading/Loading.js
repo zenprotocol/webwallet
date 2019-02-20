@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Flexbox from 'flexbox-react'
 import {isMobileOnly} from 'react-device-detect'
-import TransportU2F from "@ledgerhq/hw-transport-u2f"
+import TransportWebUSB from "@ledgerhq/hw-transport-webusb"
 
 
 import { LOADING_GIF_SRC, LOGO_GIF_SRC } from '../../constants/imgSources'
@@ -21,16 +21,16 @@ class Loading extends Component {
     if (isMobileOnly) {
       return
     }
-    const isSupported = await TransportU2F.isSupported()
+    const isSupported = await TransportWebUSB.isSupported()
 
     this.setState({
       isSupported
     })
 
     if (isSupported) {
-      const transport = await TransportU2F.create()
+      const transport = await TransportWebUSB.create()
       console.log(transport)
-      const descriptors = await TransportU2F.list()
+      const descriptors = await TransportWebUSB.list()
       console.log(descriptors)
 
       this.setState({
