@@ -22,9 +22,9 @@ class ExecuteContractStore {
     }
 
     @action
-    async run(password) {
+    async run(password, payload?) {
         this.inProgress = true
-        const payloadData = { ...this.payloadData, password }
+        const payloadData = payload ? { ...payload, password } : { ...this.payloadData, password }
         const { address, command, messageBody, options, spends } = payloadData
         try {
             await wallet.instance.executeContract(address, command, messageBody, options.returnAddress, spends)
@@ -43,7 +43,7 @@ class ExecuteContractStore {
                 this.status = 'error'
                 // TODO :: refactor after API responses are stable
                 if (err && err.response && err.response.data) {
-                    this.errorMessage = err.response.data
+                    this.errorMessage = err
                 }
                 setTimeout(() => {
                     this.status = ''

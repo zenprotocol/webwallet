@@ -45,6 +45,19 @@ export async function getNetworkStatus(): Promise<BlockChainInfo> {
   return response.data
 }
 
+export async function getContractHistory(chain: string, contractId: string, skip, take) {
+  const endpoint = chain === MAINNET ? 'https://remote-node.zp.io' : 'https://testnet-remote-node.zp.io'
+  const data = {
+    skip,
+    take,
+    contractId,
+  }
+  const response = await axios.post(`${endpoint}/addressdb/contract/history/`, data, {
+    headers: { 'Content-Type': 'application/json' },
+  })
+  return response.data
+}
+
 // CROWDSALE APIS //
 
 /* eslint-disable camelcase */

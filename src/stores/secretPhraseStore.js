@@ -21,11 +21,10 @@ class secretPhraseStore {
   @observable importError = ''
   @observable status = ''
 
-  constructor(networkStore, portfolioStore, activeContractsStore, redeemTokensStore) {
+  constructor(networkStore, portfolioStore, activeContractsStore) {
     this.networkStore = networkStore
     this.portfolioStore = portfolioStore
     this.activeContractsStore = activeContractsStore
-    this.redeemTokensStore = redeemTokensStore
     if (isDev()) {
       this.initDev()
     }
@@ -54,7 +53,7 @@ class secretPhraseStore {
     history.push(routes.TERMS_OF_SERVICE)
     return
   }
-  
+
   @action
   async unlockWallet(password) {
     if (!this.isPasswordCorrect(password)) {
@@ -70,11 +69,7 @@ class secretPhraseStore {
     this.isLoggedIn = true
     this.networkStore.initPolling()
     this.activeContractsStore.fetch()
-    if (this.redeemTokensStore.shouldRedeemNonMainnetTokens) {
-      history.push(routes.FAUCET)
-    } else {
-      history.push(routes.PORTFOLIO)
-    }
+    history.push(routes.PORTFOLIO)
   }
 
   isPasswordCorrect(password) {
