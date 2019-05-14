@@ -20,7 +20,6 @@ export default class App extends React.Component {
             <ErrorBoundary FallbackComponent={ErrorScreen}>
               <React.Fragment>
                 <Updater />
-                <Idle />
                 <div className="app-wrapper">
                   <Header/>
                   <Routes />
