@@ -13,7 +13,20 @@ const testnetInstance = axios.create({
   headers: {'Access-Control-Allow-Origin': '*'}
 })
 
+const mainnetBlockExplorer = axios.create({
+  baseURL: 'https://zp.io/api/votes/',
+  headers: {'Access-Control-Allow-Origin': '*'}
+
+})
+
+const testnetBlockExplorer = axios.create({
+  baseURL: 'https://testnet.zp.io/api/votes/',
+  headers: {'Access-Control-Allow-Origin': '*'}
+})
+
 const getInstance = () => chain.current === MAINNET ? mainnetInstance : testnetInstance
+
+const getBE = (chain) => chain === MAINNET ? mainnetBlockExplorer : testnetBlockExplorer
 
 // const crowdsaleServerAddress = getCrowdsaleServerAddress()
 
@@ -42,6 +55,16 @@ type BlockChainInfo = {
 };
 export async function getNetworkStatus(): Promise<BlockChainInfo> {
   const response = await getInstance().get('info')
+  return response.data
+}
+
+export async function getCurrentInterval(chain) {
+  const response = await getBE(chain).get('relevant')
+  return response.data
+}
+
+export async function getNextInterval() {
+  const response = await getBE().get('next')
   return response.data
 }
 

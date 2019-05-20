@@ -3,16 +3,13 @@
 import React, { Component } from 'react'
 import Flexbox from 'flexbox-react'
 import Checkbox from 'rc-checkbox'
-import { observer } from 'mobx-react'
 
 import OnBoardingLayout from '../Layout/Layout'
 import history from '../../services/history'
 import routes from '../../constants/routes'
 import wallet from '../../services/wallet'
 import ProtectedButton from '../../components/ProtectedButton'
-import {secretPhraseStore} from "../../stores"
 
-@observer
 class TermsOfService extends Component<Props> {
   state = {
     checked: false,

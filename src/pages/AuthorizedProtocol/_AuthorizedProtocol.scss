@@ -1,0 +1,19 @@
+@import "styles/Variables";
+
+.magnify {
+  background: $dark-grey-2;
+}
+
+.box-bar {
+  margin:0 -10px;
+  width: 60%;
+  min-width: 600px;
+}
+
+.orange {
+  color: $orange;
+}
+
+h3 {
+  width: 800px;
+}
