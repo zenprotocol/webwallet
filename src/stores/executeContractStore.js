@@ -43,7 +43,7 @@ class ExecuteContractStore {
                 this.status = 'error'
                 // TODO :: refactor after API responses are stable
                 if (err && err.response && err.response.data) {
-                    this.errorMessage = err
+                    this.errorMessage = err.response.data
                 }
                 setTimeout(() => {
                     this.status = ''

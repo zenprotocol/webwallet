@@ -47,10 +47,10 @@
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@zeit/schemas/-/schemas-2.6.0.tgz#004e8e553b4cd53d538bd38eac7bcbf58a867fe3"
 
-"@zen/zenjs@^0.0.3301":
-  version "0.0.3301"
-  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.3301.tgz#9368f9bc39dcd42bd0ad7cb222bed8b6070c7dc5"
-  integrity sha1-k2j5vDnc1CvQrXyyIr7YtgcMfcU=
+"@zen/zenjs@0.0.34":
+  version "0.0.34"
+  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.34.tgz#f3f69d554f69ed9d7836091675725dfdd9c09839"
+  integrity sha1-8/adVU9p7Z14NgkWdXJd/dnAmDk=
   dependencies:
     aes-js "^3.1.1"
     axios "^0.18.0"

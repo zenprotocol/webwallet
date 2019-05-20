@@ -4,15 +4,14 @@ import { isEmpty } from 'lodash'
 
 import wallet from '../services/wallet'
 import PollManager from '../utils/PollManager'
-import { MAINNET } from '../services/chain'
 
 class TxHistoryStore {
   @observable batchSize = 100
   @observable transactions = []
   @observable skip = 0
   @observable currentPageSize = 0
-  @observable snapshotBlock = 129000
   @observable isFetching = false
+  @observable snapshotBlock
   fetchPollManager = new PollManager({
     name: 'tx history fetch',
     fnToPoll: this.fetch,
