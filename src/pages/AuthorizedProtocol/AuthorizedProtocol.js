@@ -103,7 +103,7 @@ class AuthorizedProtocol extends Component<Props, State> {
     if (this.state.zeroBalance) return null
     if (this.state.zeroBalance) return null
     this.props.authorizedProtocolStore.getVote()
-        .then(bool => bool)
+        .then(bool => this.setState({ hasVoted: bool }))
         .catch(error => console.error(error))
     const vote =
         this.props.authorizedProtocolStore.votedCommit || this.props.authorizedProtocolStore.commit

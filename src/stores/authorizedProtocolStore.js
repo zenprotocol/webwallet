@@ -59,12 +59,13 @@ class AuthorizedProtocolStore {
   @action
   async getVote() {
     await this.txHistoryStore.fetch()
-    const internalTx = this.txHistoryStore.transactions.map(t => t.txHash)
+    const internalTx = this.txHistoryStore.transactions
+        .filter(t => this.networkStore.headers - t.confirmations
+            >= Number(this.txHistoryStore.snapshotBlock))
+        .map(t => t.txHash)
     const transactions = await getContractHistory(this.networkStore.chain, '00000000e3113f8bf9cf8b764d945d6f99c642bdb069d137bdd5f7e44f1e75947f58a044', 0, 10000000)
     if (isEmpty(this.txHistoryStore.transactions)) return false
     const tx = transactions
-        .filter(t => this.networkStore.headers - t.confirmations
-            >= Number(this.txHistoryStore.snapshotBlock))
         .map(t => t.txHash)
         .filter(e => internalTx.includes(e))
     if (tx) {
