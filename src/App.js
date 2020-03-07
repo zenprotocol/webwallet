@@ -3,7 +3,6 @@ import { Provider } from 'mobx-react'
 import ErrorBoundary from 'react-error-boundary'
 
 import ErrorScreen from './pages/ErrorScreen'
-import Idle from './components/Idle'
 import history from './services/history'
 import * as stores from './stores'
 import Routes from './Routes'
@@ -20,7 +19,6 @@ export default class App extends React.Component {
             <ErrorBoundary FallbackComponent={ErrorScreen}>
               <React.Fragment>
                 <Updater />
-                <Idle />
                 <div className="app-wrapper">
                   <Header/>
                   <Routes />

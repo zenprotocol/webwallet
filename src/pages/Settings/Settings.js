@@ -141,7 +141,7 @@ class Settings extends Component<Props> {
         {this.renderAutoLogout()}
         {this.renderChain()}
         {this.renderShowSeed()}
-        {this.renderShowReleaseNote()}
+        {/*{this.renderShowReleaseNote()}*/}
         {this.renderLogout()}
         {this.renderWipe()}
       </Layout>

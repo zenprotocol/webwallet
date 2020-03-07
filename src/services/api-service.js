@@ -13,7 +13,20 @@ const testnetInstance = axios.create({
   headers: {'Access-Control-Allow-Origin': '*'}
 })
 
+const mainnetBlockExplorer = axios.create({
+  baseURL: 'https://zp.io/api/votes/',
+  headers: {'Access-Control-Allow-Origin': '*'}
+
+})
+
+const testnetBlockExplorer = axios.create({
+  baseURL: 'https://staging-testnet.zp.io/api/votes/',
+  headers: {'Access-Control-Allow-Origin': '*'}
+})
+
 const getInstance = () => chain.current === MAINNET ? mainnetInstance : testnetInstance
+
+const getBE = (chain) => chain === MAINNET ? mainnetBlockExplorer : testnetBlockExplorer
 
 // const crowdsaleServerAddress = getCrowdsaleServerAddress()
 
@@ -42,6 +55,34 @@ type BlockChainInfo = {
 };
 export async function getNetworkStatus(): Promise<BlockChainInfo> {
   const response = await getInstance().get('info')
+  return response.data
+}
+
+export async function getCurrentInterval(chain) {
+  const response = await getBE(chain).get('relevant')
+  return response.data
+}
+
+export async function getCandidates(chain) {
+  const response = await getBE(chain).get('candidates')
+  return response.data.data
+}
+
+export async function getNextInterval() {
+  const response = await getBE().get('next')
+  return response.data
+}
+
+export async function getContractHistory(chain: string, contractId: string, skip, take) {
+  const endpoint = chain === MAINNET ? 'https://remote-node.zp.io' : 'https://testnet-remote-node.zp.io'
+  const data = {
+    skip,
+    take,
+    contractId,
+  }
+  const response = await axios.post(`${endpoint}/addressdb/contract/history/`, data, {
+    headers: { 'Content-Type': 'application/json' },
+  })
   return response.data
 }
 

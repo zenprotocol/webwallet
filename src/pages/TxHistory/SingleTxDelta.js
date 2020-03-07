@@ -38,7 +38,7 @@ class SingleTxDelta extends React.Component<Props> {
   }
   get getLink() {
       const { networkStore } = this.props
-      return networkStore.chain === MAINNET ? '' : 'testnet.'
+      return networkStore.chain === MAINNET ? '' : 'staging-testnet.'
   }
 
   render() {

@@ -3,10 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "engines": {
-    "yarn": "1.12.3"
+    "yarn": "1.13.0"
   },
   "dependencies": {
-    "@zen/zenjs": "0.0.25",
+    "@zen/zenjs": "0.0.45",
     "autoprefixer": "7.1.2",
     "axios": "^0.18.0",
     "babel-core": "6.25.0",
@@ -78,7 +78,7 @@
     "url-loader": "0.5.9",
     "webpack": "3.5.1",
     "webpack-dashboard": "^1.0.0-2",
-    "webpack-dev-server": "2.7.1",
+    "webpack-dev-server": "3.1.11",
     "webpack-manifest-plugin": "1.2.1",
     "whatwg-fetch": "2.0.3"
   },
