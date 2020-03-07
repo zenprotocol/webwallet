@@ -43,7 +43,7 @@ class CopyableTableCell extends React.Component<Props, State> {
   }
   get getLink() {
     const { networkStore } = this.props
-      return networkStore.chain === MAINNET ? '' : 'testnet.'
+      return networkStore.chain === MAINNET ? '' : 'staging-testnet.'
   }
   renderString() {
     const { string, istx } = this.props

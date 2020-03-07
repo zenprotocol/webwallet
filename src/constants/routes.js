@@ -9,6 +9,7 @@ export default {
   FAUCET: '/faucet',
   LOADING: '/loading',
   UNLOCK_WALLET: '/unlock-wallet',
+  AUTHORIZED_PROTOCOL: '/authorized-protocol',
   SETTINGS: '/settings',
   // Onboarding routes
   WELCOME_MESSAGES: '/welcome-messages',

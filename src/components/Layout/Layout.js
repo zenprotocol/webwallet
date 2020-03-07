@@ -9,6 +9,7 @@ import Container from '../Container'
 import Main from '../Main'
 import Topbar from '../Topbar'
 import Sidebar from '../Sidebar'
+import Idle from "../Idle/Idle"
 
 type Props = {
   children: React.Node,
@@ -22,6 +23,7 @@ class Layout extends React.Component<Props> {
               <Online>
                   <Container className={cx('main', this.props.className)} >
                       <Sidebar title="Zen Protocol" />
+                      <Idle />
                       <Main>
                           {/* $FlowIssue */ }
                           <Topbar />

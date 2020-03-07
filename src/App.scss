@@ -21,7 +21,9 @@
  @import "styles/MonokaiSublime";
  @import "styles/Balloon";
  //
+@import "components/BoxLabel/BoxLabel";
  @import "components/Layout/Layout";
+ @import "components/Loading/Loading";
  @import "components/Container/Container";
  @import "components/Main/Main";
  @import "components/Topbar/Topbar";
@@ -30,11 +32,11 @@
  @import "components/FormResponseMessage/FormResponseMessage";
  @import "components/Updater/Updater";
  //
- @import "pages/ErrorScreen/ErrorScreen";
+@import "pages/AuthorizedProtocol/AuthorizedProtocol";
+@import "pages/ErrorScreen/ErrorScreen";
  @import "pages/Portfolio/Portfolio";
  @import "pages/Receive/Receive";
  @import "pages/SendTx/SendTx";
- @import "pages/Faucet/Faucet";
  @import "pages/ActiveContracts/ActiveContracts";
  @import "pages/Loading/Loading";
  @import "pages/UnlockWallet/UnlockWallet";
