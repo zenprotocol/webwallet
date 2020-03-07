@@ -20,7 +20,7 @@ const mainnetBlockExplorer = axios.create({
 })
 
 const testnetBlockExplorer = axios.create({
-  baseURL: 'https://testnet.zp.io/api/votes/',
+  baseURL: 'https://staging-testnet.zp.io/api/votes/',
   headers: {'Access-Control-Allow-Origin': '*'}
 })
 
