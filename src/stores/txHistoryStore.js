@@ -1,5 +1,6 @@
 // @flow
 import { observable, action, runInAction } from 'mobx'
+import { isEmpty } from 'lodash'
 
 import wallet from '../services/wallet'
 import PollManager from '../utils/PollManager'
@@ -10,11 +11,15 @@ class TxHistoryStore {
   @observable skip = 0
   @observable currentPageSize = 0
   @observable isFetching = false
+  @observable snapshotBlock
   fetchPollManager = new PollManager({
     name: 'tx history fetch',
     fnToPoll: this.fetch,
     timeoutInterval: 5000,
   })
+  constructor(networkStore) {
+    this.networkStore = networkStore
+  }
   @action
   initPolling() {
     this.fetchPollManager.initPolling()
@@ -34,6 +39,24 @@ class TxHistoryStore {
       this.isFetching = false
     })
   }
+
+  @action
+  fetchSnapshot = async () => {
+    await wallet.fetch()
+    const data = await wallet.instance.getTransactions()
+    if (isEmpty(data)) return 0
+    const final = data
+        .filter(x => x.asset === '00')
+        .map(({ amount, confirmations }) => ({
+          amount,
+          blockNumber: this.networkStore.blocks - confirmations,
+        }))
+        .filter(item => item.blockNumber <= this.snapshotBlock)
+        .map(item => item.amount)
+    if (isEmpty(final)) return 0
+    return final.reduce((total, n) => total + n)
+  }
+
 
   @action.bound
   fetch = async () => {

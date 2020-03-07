@@ -8,10 +8,10 @@ import SendTx from './pages/SendTx/SendTx'
 import TxHistory from './pages/TxHistory/TxHistory'
 import Receive from './pages/Receive/Receive'
 import ActiveContracts from './pages/ActiveContracts/ActiveContracts'
-import Faucet from './pages/Faucet/Faucet'
 import Loading from './pages/Loading/Loading'
 import UnlockWallet from './pages/UnlockWallet/UnlockWallet'
 import Settings from './pages/Settings'
+import AuthorizedProtocol from './pages/AuthorizedProtocol/AuthorizedProtocol'
 // Onboarding routes
 import WelcomeMessages from './onBoardingPages/WelcomeMessages/WelcomeMessages'
 import ImportOrCreateWallet from './onBoardingPages/ImportOrCreateWallet/ImportOrCreateWallet'
@@ -32,9 +32,9 @@ const Routes = () => (
       <Route exact path={routes.TX_HISTORY} component={TxHistory} />
       <Route exact path={routes.ACTIVE_CONTRACTS} component={ActiveContracts} />
       <Route exact path={routes.EXECUTE_CONTRACT} component={ExecuteContract} />
-      <Route exact path={routes.FAUCET} component={Faucet} />
       <Route exact path={routes.LOADING} component={Loading} />
       <Route exact path={routes.UNLOCK_WALLET} component={UnlockWallet} />
+      <Route exact path={routes.AUTHORIZED_PROTOCOL} component={AuthorizedProtocol} />
       <Route exact path={routes.SETTINGS} component={Settings} />
       { /* Onboarding Routes */ }
       <Route exact path={routes.WELCOME_MESSAGES} component={WelcomeMessages} />
