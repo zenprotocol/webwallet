@@ -36,9 +36,10 @@ export const isValidAddress = (address: ?string, type?: 'contract' | 'pubKey' = 
 
 export const isValidHex = (hex: string): boolean => /[0-9a-f]{40}/g.test(hex)
 
-export const hashVoteData = (commitID: string, interval = 1) => Buffer.from(sha
+export const hashVoteData = (commitID: string, interval = 1, phase: "Contestant" | "Candidate" = 'Contestant') => Buffer.from(sha
     .update(sha(Data.serialize(new Data.UInt32(BigInteger.valueOf(interval)))))
-    .update(sha(Data.serialize(new Data.String(commitID)))).toString(),'hex')
+    .update(sha(Data.serialize(new Data.String(phase))))
+    .update(sha(Data.serialize(new Data.String(commitID)))).toString(), 'hex')
 
 export const payloadData = (address, messageBody, commitId) => {
   const data = {

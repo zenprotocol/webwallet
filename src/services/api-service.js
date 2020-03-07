@@ -63,6 +63,11 @@ export async function getCurrentInterval(chain) {
   return response.data
 }
 
+export async function getCandidates(chain) {
+  const response = await getBE(chain).get('candidates')
+  return response.data.data
+}
+
 export async function getNextInterval() {
   const response = await getBE().get('next')
   return response.data

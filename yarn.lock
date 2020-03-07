@@ -47,13 +47,13 @@
   version "2.6.0"
   resolved "https://registry.yarnpkg.com/@zeit/schemas/-/schemas-2.6.0.tgz#004e8e553b4cd53d538bd38eac7bcbf58a867fe3"
 
-"@zen/zenjs@0.0.34":
-  version "0.0.34"
-  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.34.tgz#f3f69d554f69ed9d7836091675725dfdd9c09839"
-  integrity sha1-8/adVU9p7Z14NgkWdXJd/dnAmDk=
+"@zen/zenjs@0.0.45":
+  version "0.0.45"
+  resolved "https://www.myget.org/F/zenprotocol/npm/@zen/zenjs/-/@zen/zenjs-0.0.45.tgz#18616b370bc990028ea88735acb046cf9b7cdcd7"
+  integrity sha1-GGFrNwvJkAKOqIc1rLBGz5t83Nc=
   dependencies:
     aes-js "^3.1.1"
-    axios "^0.18.0"
+    axios "^0.19.0"
     bech32 "^1.1.3"
     bigi "^1.4.2"
     bip39 "^2.5.0"
@@ -61,8 +61,8 @@
     buffer "^5.1.0"
     create-hmac "^1.1.7"
     js-sha3 "^0.7.0"
-    js-yaml "^3.12.0"
-    lodash "^4.17.10"
+    js-yaml "^3.13.1"
+    lodash "^4.17.15"
     pbkdf2 "^3.0.16"
     pkcs7 "^1.0.2"
     randombytes "^2.0.6"
@@ -496,6 +496,13 @@ axios@^0.18.0:
   dependencies:
     follow-redirects "^1.3.0"
     is-buffer "^1.1.5"
+
+axios@^0.19.0:
+  version "0.19.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-0.19.2.tgz#3ea36c5d8818d0d5f8a8a97a6d36b86cdc00cb27"
+  integrity sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==
+  dependencies:
+    follow-redirects "1.5.10"
 
 axobject-query@^0.1.0:
   version "0.1.0"
@@ -3563,9 +3570,10 @@ flexbox-react@^4.4.0:
     "@types/react" "^15.0.21"
     "@types/react-dom" "^0.14.23"
 
-follow-redirects@^1.0.0, follow-redirects@^1.3.0:
+follow-redirects@1.5.10, follow-redirects@^1.0.0, follow-redirects@^1.3.0:
   version "1.5.10"
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.5.10.tgz#7b7a9f9aea2fdff36786a94ff643ed07f4ff5e2a"
+  integrity sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==
   dependencies:
     debug "=3.1.0"
 
@@ -5013,7 +5021,15 @@ js-tokens@^3.0.0, js-tokens@^3.0.2:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/js-tokens/-/js-tokens-4.0.0.tgz#19203fb59991df98e3a287050d4647cdeaf32499"
 
-js-yaml@^3.12.0, js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.0, js-yaml@^3.9.1:
+js-yaml@^3.13.1:
+  version "3.13.1"
+  resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.13.1.tgz#aff151b30bfdfa8e49e05da22e7415e9dfa37847"
+  integrity sha512-YfbcO7jXDdyj0DGxYVSlSeQNHbD7XPWvrVWeVUujrQEoZzWJIRrCPoyk6kL6IAjAG2IolMK4T0hNUe0HOUs5Jw==
+  dependencies:
+    argparse "^1.0.7"
+    esprima "^4.0.0"
+
+js-yaml@^3.4.3, js-yaml@^3.7.0, js-yaml@^3.9.0, js-yaml@^3.9.1:
   version "3.12.0"
   resolved "https://registry.yarnpkg.com/js-yaml/-/js-yaml-3.12.0.tgz#eaed656ec8344f10f527c6bfa1b6e2244de167d1"
   dependencies:
@@ -5426,6 +5442,11 @@ lodash.uniq@^4.5.0:
 "lodash@>=3.5 <5", lodash@^4.0.0, lodash@^4.15.0, lodash@^4.17.10, lodash@^4.17.2, lodash@^4.17.3, lodash@^4.17.4, lodash@^4.17.5, lodash@^4.2.0, lodash@^4.3.0, lodash@^4.6.1, lodash@~4.17.10:
   version "4.17.11"
   resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.11.tgz#b39ea6229ef607ecd89e2c8df12536891cac9b8d"
+
+lodash@^4.17.15:
+  version "4.17.15"
+  resolved "https://registry.yarnpkg.com/lodash/-/lodash-4.17.15.tgz#b447f6670a0455bbfeedd11392eff330ea097548"
+  integrity sha512-8xOcRHvCjnocdS5cpwXQXVzmmh5e5+saE2QGoeQmbKmRS6J3VQppPOIt0MnmE+4xlZoumy0GPG0D0MVIQbNA1A==
 
 log-symbols@^1.0.2:
   version "1.0.2"

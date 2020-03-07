@@ -4,6 +4,7 @@ import { observer } from 'mobx-react'
 
 import confirmPasswordModal from '../../services/confirmPasswordModal'
 
+import enforceSyncedModal from './enforceSyncedModal'
 
 type Props = {
   children: Node,
@@ -12,8 +13,12 @@ type Props = {
 
 @observer
 class ProtectedButton extends React.Component<Props> {
+  static defaultProps = {
+    requireSync: true,
+  }
   onClick = async (evt: SyntheticEvent<HTMLButtonElement>) => {
-    const confirmedPassword = await confirmPasswordModal()
+    evt.persist()
+    const confirmedPassword = await protectedModals(this.props)
     if (!confirmedPassword) {
       return
     }
@@ -21,9 +26,7 @@ class ProtectedButton extends React.Component<Props> {
   }
 
   render() {
-    const {
-      children, ...remainingProps
-    } = this.props
+    const { requireSync, children, ...remainingProps } = this.props
     return (
       <button {...remainingProps} onClick={this.onClick}>
         {children}
@@ -33,3 +36,19 @@ class ProtectedButton extends React.Component<Props> {
 }
 
 export default ProtectedButton
+
+export async function protectedModals({ requireSync } = {}) {
+  if (requireSync) {
+    console.log('entering require sync')
+    const canContinue = await enforceSyncedModal()
+    if (!canContinue) {
+      return null
+    }
+  }
+  console.log('passed require sync')
+  const confirmedPassword = await confirmPasswordModal()
+  if (!confirmedPassword) {
+    return null
+  }
+  return confirmedPassword
+}
