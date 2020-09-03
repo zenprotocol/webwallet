@@ -69,7 +69,7 @@
     "react-switch": "^3.0.4",
     "sass-loader": "^6.0.6",
     "semver-compare": "^1.0.0",
-    "serve": "^10.0.0",
+    "serve": "^10.1.2",
     "style-loader": "0.18.2",
     "stylus": "^0.54.5",
     "stylus-loader": "^3.0.1",
